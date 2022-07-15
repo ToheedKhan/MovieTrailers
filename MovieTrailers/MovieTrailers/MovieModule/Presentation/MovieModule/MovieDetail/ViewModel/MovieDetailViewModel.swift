@@ -1,0 +1,20 @@
+//
+//  MovieDetailViewModel.swift
+//  MovieTrailers
+//
+//  Created by Toheed Jahan Khan on 30/06/22.
+//
+
+import Foundation
+
+class MovieDetailViewModel {
+    var posterImagePath: String?
+    var overview: String?
+    var movieTitle: String?
+    
+    init(movie: MovieListCellViewModel?) {
+        self.posterImagePath = (movie?.posterImagePath ?? "")
+        self.overview = movie?.overview ?? ""
+        self.movieTitle = movie?.title ?? ""
+    }
+}
