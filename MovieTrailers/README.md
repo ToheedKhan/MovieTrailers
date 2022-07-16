@@ -29,8 +29,3 @@ Clean + MVVM
 </kbd>
 
 </p>
-
-
-https://www.themoviedb.org/faq/account
-
-[TMDB](https://www.themoviedb.org)
