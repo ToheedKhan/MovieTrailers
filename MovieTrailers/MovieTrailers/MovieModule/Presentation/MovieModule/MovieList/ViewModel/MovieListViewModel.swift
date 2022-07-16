@@ -99,10 +99,6 @@ extension MovieListViewModel {
             }
             return false
         }
-        /*
-         let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
-         let array = (tableData as NSArray).filtered(using: searchPredicate)
-         filteredTableData = array as! [String] */
     }
     func didCancelSearch() {
         isSearching =  false

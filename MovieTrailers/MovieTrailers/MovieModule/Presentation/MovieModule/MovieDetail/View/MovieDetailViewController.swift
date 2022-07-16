@@ -42,6 +42,7 @@ class MovieDetailViewController: UIViewController {
         self.navigationItem.title = viewModel?.movieTitle
         self.overviewTextView.text = viewModel?.overview
         posterImageView.loadImage(urlString: posterImageUrl)
+        self.view.accessibilityIdentifier = MovieSceneAccessibilityIdentifier.movieDetailsView
     }
     
 }

@@ -20,8 +20,8 @@ class MockFetchMovieUseCase : FetchRecentMoviesUseCase {
             if let error = error {
                 seal.reject(error)
             } else {
-                if let movie = movies {
-                    seal.fulfill(movie)
+                if let fetchedMovies = movies {
+                    seal.fulfill(fetchedMovies)
                 }
             }
         }

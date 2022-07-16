@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieListViewController: UIViewController {
+class MovieListViewController: UIViewController, Alertable {
     
     //MARK:- Layout:-
     @IBOutlet weak var searchBar: UISearchBar!
@@ -42,11 +42,18 @@ class MovieListViewController: UIViewController {
     }
     
     // MARK: - Private
+    private func addAccessibilityIdentifier() {
+        tableView.accessibilityIdentifier = MovieSceneAccessibilityIdentifier.movieTableView
+        if #available(iOS 13.0, *) {
+            searchBar.searchTextField.accessibilityIdentifier = MovieSceneAccessibilityIdentifier.searchField
+        }
+    }
     
     private func setupViews() {
 //        title = viewModel.screenTitle
         setupTableView()
         setupSearchBar()
+        addAccessibilityIdentifier()
     }
     
     private func setupSearchBar() {
@@ -72,17 +79,6 @@ class MovieListViewController: UIViewController {
         }
         self.searchBar.keyboardAppearance = .dark
     }
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        
-//        let searchTextField: UITextField? = searchBar.value(forKey: "searchField") as? UITextField
-//        var currentTextFieldBounds = searchTextField?.bounds
-//        currentTextFieldBounds?.size.height = 130
-//        searchTextField?.bounds = currentTextFieldBounds ?? CGRect.zero
-//        
-//        searchBar.layoutIfNeeded()
-//        searchBar.layoutSubviews()
-//    }
     
     private func setupNavigation() {
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : AppTheme.darkishPink ?? UIColor.black]
@@ -91,8 +87,8 @@ class MovieListViewController: UIViewController {
     }
    
     private func updateItems() {
-        guard ((viewModel?.cellViewModels.value.isEmpty) != nil) else {
-//            self.showAlert(.empty)
+        guard let cellViewModels = viewModel?.cellViewModels.value,  !cellViewModels.isEmpty else {
+            showAlert(title: "Attention", message: "No Data Found")
             return
         }
         DispatchQueue.main.async {
@@ -102,7 +98,7 @@ class MovieListViewController: UIViewController {
     
     private func showError(_ error: String) {
         guard !error.isEmpty else { return }
-//        showAlert(title: viewModel.errorTitle, message: error)
+        showAlert(title: "Attention", message: "Something went wrong")
     }
     
 }
@@ -129,13 +125,7 @@ extension MovieListViewController {
             }
         }
       
-    }
-    
-//    func showAlert(_ type: AlertType = .error){
-//
-//    }
-    
-    
+    } 
 }
 
 //MARK:- Table View Data Source
@@ -212,5 +202,6 @@ extension MovieListViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         viewModel?.didCancelSearch()
+        view.endEditing(true)
     }
 }
