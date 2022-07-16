@@ -74,7 +74,7 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
     
     private func getData(model: MovieDTO) {
         movies = model.movies.map(MovieListCellViewModel.init)
-        cellViewModels.value = []//movies
+        cellViewModels.value = movies
     }
     
     private func handle(error: Error) {
