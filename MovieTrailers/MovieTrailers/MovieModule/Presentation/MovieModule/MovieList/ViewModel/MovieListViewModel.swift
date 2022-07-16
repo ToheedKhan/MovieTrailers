@@ -74,7 +74,7 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
     
     private func getData(model: MovieDTO) {
         movies = model.movies.map(MovieListCellViewModel.init)
-        cellViewModels.value = movies
+        cellViewModels.value = []//movies
     }
     
     private func handle(error: Error) {
@@ -99,10 +99,6 @@ extension MovieListViewModel {
             }
             return false
         }
-        /*
-         let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
-         let array = (tableData as NSArray).filtered(using: searchPredicate)
-         filteredTableData = array as! [String] */
     }
     func didCancelSearch() {
         isSearching =  false
