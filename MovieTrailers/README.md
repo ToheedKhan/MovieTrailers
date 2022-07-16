@@ -2,7 +2,7 @@
 This app fetch movies data from [TMDB](https://www.themoviedb.org) and display it in a table view.
 User can search movies in displayed list. On tap of table row, user will navigate to detail screen.
 
-** TMDB API ** is free. You need to sign up to get an API key.
+**TMDB API** is free. You need to sign up to get an API key.
 
 ## Framework Used
 
