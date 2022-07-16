@@ -11,18 +11,20 @@ protocol MoviesListViewModelInput {
     func getMovies()
     func didSearch(searchText: String)
     func didCancelSearch()
-    func didSelectItem(at index: Int)
 }
 
 protocol MoviesListViewModelOutput {
-    var cellViewModels: Observable<[MovieListCellViewModel]> { get }
-    var error: Observable<String> { get }
-
+    var successResponse: (() -> Void)? { get set }
+    var errorResponse: ((String) -> Void)? { get set }
+    
     var loading :((Bool) ->())! { get set }
     var isRefresh: ((Bool) -> ())! { get set }
 
     var screenTitle: String { get }
     var errorTitle: String { get }
+    
+    var cellViewModels: [MovieListCellViewModel] {get}
+
 }
 
 protocol MoviesListViewModelProtocol: MoviesListViewModelInput, MoviesListViewModelOutput {}
@@ -32,17 +34,16 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
     //MARK:- Variable & Constants:-
     private let useCase: FetchRecentMoviesUseCase
     private var movies: [MovieListCellViewModel] = []
-    
+    var cellViewModels: [MovieListCellViewModel] = []
+    var isSearching = false
+
     // MARK: - OUTPUT
+
+    var successResponse: (() -> Void)?
+    var errorResponse: ((String) -> Void)?
     
-    let cellViewModels: Observable<[MovieListCellViewModel]> = Observable([])
-
-    let error: Observable<String> = Observable("")
-
     var loading: ((Bool) -> ())!
     var isRefresh: ((Bool) -> ())!
-    
-    var isSearching = false
 
     let screenTitle = NSLocalizedString("Movies", comment: "")
     let errorTitle = NSLocalizedString("Error", comment: "")
@@ -56,7 +57,7 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
     //MARK: - Private Methods
     //MARK:- NetWork
     
-    private func fetchMovies() {
+     func fetchMovies() {
         self.loading?(true)
         useCase.fetchRecentMovies()
             .done(on: .main) { [weak self] model in
@@ -74,11 +75,12 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
     
     private func getData(model: MovieDTO) {
         movies = model.movies.map(MovieListCellViewModel.init)
-        cellViewModels.value = movies
+        cellViewModels = movies
+        self.successResponse?()
     }
     
     private func handle(error: Error) {
-        self.error.value = error.localizedDescription
+        self.errorResponse?(error.localizedDescription )
     }
 
 }
@@ -93,20 +95,18 @@ extension MovieListViewModel {
     func didSearch(searchText: String) {
         isSearching = true
         
-        cellViewModels.value = movies.filter { movie in
+        cellViewModels = movies.filter { movie in
             if let movieTitle = movie.title {
                 return movieTitle.lowercased().prefix(searchText.count) == searchText.lowercased()
             }
             return false
         }
+        self.successResponse?()
     }
     func didCancelSearch() {
         isSearching =  false
-        cellViewModels.value = movies
-    }
-    
-    func didSelectItem(at index: Int) {
-        isSearching = false
+        cellViewModels = movies
+        self.successResponse?()
     }
 }
 

@@ -22,7 +22,7 @@ class MovieListViewController: UIViewController, Alertable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        bind(to: viewModel)
+        setupResponses()
         viewModel?.getMovies()
     }
     
@@ -31,10 +31,7 @@ class MovieListViewController: UIViewController, Alertable {
         setupNavigation()
         self.navigationItem.title = viewModel?.screenTitle
     }
-    private func bind(to viewModel: MoviesListViewModelProtocol?) {
-        viewModel?.cellViewModels.observe(on: self) { [weak self] _ in self?.updateItems() }
-        viewModel?.error.observe(on: self) { [weak self] in self?.showError($0) }
-    }
+    
     //MARK:- Refresh Update
     @objc func refresh(){
         viewModel?.isRefresh?(true)
@@ -50,7 +47,6 @@ class MovieListViewController: UIViewController, Alertable {
     }
     
     private func setupViews() {
-//        title = viewModel.screenTitle
         setupTableView()
         setupSearchBar()
         addAccessibilityIdentifier()
@@ -85,25 +81,9 @@ class MovieListViewController: UIViewController, Alertable {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : AppTheme.darkishPink ?? UIColor.black]
         navigationController?.navigationBar.tintColor = AppTheme.darkishPink
     }
-   
-    private func updateItems() {
-        guard let cellViewModels = viewModel?.cellViewModels.value,  !cellViewModels.isEmpty else {
-//            showAlert(title: "Attention", message: "No Data Found")
-            return
-        }
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-    
-    private func showError(_ error: String) {
-        guard !error.isEmpty else { return }
-        showAlert(title: "Attention", message: "Something went wrong")
-    }
-    
 }
 
-//MARK:- Setup View Model
+//MARK: - Setup View Model
 extension MovieListViewController {
     
     func setupViewModel() {
@@ -125,10 +105,39 @@ extension MovieListViewController {
             }
         }
       
-    } 
+    }
+    
+    private func setupResponses() {
+        viewModel?.successResponse = { [weak self] in
+            DispatchQueue.main.async {
+                self?.updateItems()
+            }
+        }
+        
+        viewModel?.errorResponse = { [weak self] error in
+            DispatchQueue.main.async {
+                self?.showError(error)
+            }
+        }
+    }
+    
+    private func updateItems() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        guard let cellViewModels = viewModel?.cellViewModels,  !cellViewModels.isEmpty else {
+            showAlert(title: "Attention", message: "No Data Found")
+            return
+        }
+    }
+    
+    private func showError(_ error: String) {
+        guard !error.isEmpty else { return }
+        showAlert(title: "Attention", message: "Something went wrong")
+    }
 }
 
-//MARK:- Table View Data Source
+//MARK: - UITableViewDataSource
 extension MovieListViewController: UITableViewDataSource {
     
     fileprivate func setupTableView(){
@@ -138,30 +147,29 @@ extension MovieListViewController: UITableViewDataSource {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
         tableView.addSubview(refreshControl)
-//        self.tableView.register(cell: MovieTableCell.self)
         self.tableView.tableFooterView = UIView()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.cellViewModels.value.count ?? 0
+        return viewModel?.cellViewModels.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //        let cell = tableView.dequeue() as MovieTableCell
         let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableCell.reuseIdentifier) as! MovieTableCell
-        cell.cellViewModel = viewModel?.cellViewModels.value[indexPath.row]
+        cell.cellViewModel = viewModel?.cellViewModels[indexPath.row]
        
         return cell
     }
     
 }
 
-//MARK:- Table View Delegate
+//MARK: - UITableViewDelegate
 
 extension MovieListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return ((viewModel?.cellViewModels.value.isEmpty) != nil)
+        return ((viewModel?.cellViewModels.isEmpty) != nil)
                                           ? MovieTableCell.height
                                           : tableView.frame.height
     }
@@ -175,7 +183,7 @@ extension MovieListViewController: UITableViewDelegate {
     }
 }
 
-//MARK:- Navigation
+//MARK: - Navigation
 
 extension MovieListViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -185,7 +193,7 @@ extension MovieListViewController {
             if let destinationViewController = segue.destination as? MovieDetailViewController
             {
                 let indexPath = self.tableView.indexPathForSelectedRow!
-                destinationViewController.viewModel = MovieDetailViewModel(movie: viewModel?.cellViewModels.value[indexPath.row] ?? nil)
+                destinationViewController.viewModel = MovieDetailViewModel(movie: viewModel?.cellViewModels[indexPath.row] ?? nil)
             }
         }
     }
