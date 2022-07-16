@@ -88,7 +88,7 @@ class MovieListViewController: UIViewController, Alertable {
    
     private func updateItems() {
         guard let cellViewModels = viewModel?.cellViewModels.value,  !cellViewModels.isEmpty else {
-            showAlert(title: "Attention", message: "No Data Found")
+//            showAlert(title: "Attention", message: "No Data Found")
             return
         }
         DispatchQueue.main.async {
