@@ -13,6 +13,15 @@ User can search movies in displayed list. On tap of table row, user will navigat
 ## Architecture  
 Clean + MVVM
 
+<kbd>
+<img width="733" alt="Screenshot 2022-07-20 at 4 32 32 PM" src="https://user-images.githubusercontent.com/4839453/179966968-610d7507-ebc7-4172-8fac-934a8e7eb251.png">
+</kbd>
+
+## Flow Diagram
+<kbd>
+<img width="400" alt="Screenshot 2022-07-20 at 2 22 32 PM" src="https://user-images.githubusercontent.com/4839453/179944279-e2a8ebb1-7121-4920-afcc-196ac2967a8b.png">
+</kbd>
+
 ## Screenshots
 
 <p float="left">
