@@ -9,7 +9,7 @@ import Foundation
 import PromiseKit
 @testable import MovieTrailers
 
-class MockNetworkManager: NetworkManagerProtocol {
+final class MockNetworkManager: NetworkManagerProtocol {
     
     var movies: MovieDTO?
     var error: Error?

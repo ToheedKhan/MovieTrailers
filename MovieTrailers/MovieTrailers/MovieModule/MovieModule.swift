@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MovieModule {
+struct MovieModule {
     
     private let networkManager: NetworkManagerProtocol
     
@@ -16,14 +16,30 @@ class MovieModule {
         self.networkManager = networkManager
     }
     
-    func createMovieListViewController() -> UIViewController {
+    func createMovieFlowCoordinator(navigationController: UINavigationController) -> MovieFlowCoordinator {
+        return MovieFlowCoordinator.init(navigationController: navigationController, movieModule: self)
+    }
+    
+    func createMovieListViewController(actions: MovieListViewModelActions) -> UIViewController {
         let viewController = MovieListViewController.initialize(on: .main)
-        viewController.viewModel = createMovieListViewModel()
+        viewController.viewModel = createMovieListViewModel(actions: actions)
         return viewController
     }
     
-    private func createMovieListViewModel() -> MoviesListViewModelProtocol {
-        let viewModel = MovieListViewModel(useCase: createMovieUseCase())
+    func createMovieDetailViewController(with movieCellViewModel: MovieListCellViewModel) -> MovieDetailViewController {
+        let movieDetailVC = MovieDetailViewController.initialize(on: .main)
+        movieDetailVC.viewModel = createMovieDetailViewModel(with: movieCellViewModel)
+        return movieDetailVC
+    }
+    
+    //MARK: - Private Methods
+    private func createMovieDetailViewModel(with movieCellViewModel: MovieListCellViewModel) -> MovieDetailViewModel {
+        let viewModel = MovieDetailViewModel(movie: movieCellViewModel)
+        return viewModel
+    }
+    
+    private func createMovieListViewModel(actions: MovieListViewModelActions) -> MoviesListViewModelProtocol {
+        let viewModel = MovieListViewModel(useCase: createMovieUseCase(), actions: actions)
         return viewModel
     }
     

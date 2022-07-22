@@ -9,11 +9,7 @@ import Foundation
 
 struct MovieDTO: Codable {
     var movies: [Movie]
-    
-    init() {
-        movies = []
-    }
-    
+   
     enum CodingKeys: String, CodingKey {
         case movies = "results"
     }

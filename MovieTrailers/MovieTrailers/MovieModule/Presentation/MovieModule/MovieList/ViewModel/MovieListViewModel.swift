@@ -7,10 +7,15 @@
 
 import Foundation
 
+struct MovieListViewModelActions {
+    let showMovieDetails: (MovieListCellViewModel) -> Void
+}
+
 protocol MoviesListViewModelInput {
     func getMovies()
     func didSearch(searchText: String)
     func didCancelSearch()
+    func didSelectMovieAt(index: Int)
 }
 
 protocol MoviesListViewModelOutput {
@@ -19,45 +24,48 @@ protocol MoviesListViewModelOutput {
     
     var loading :((Bool) ->())! { get set }
     var isRefresh: ((Bool) -> ())! { get set }
+    var isSearching: Bool { get }
 
     var screenTitle: String { get }
     var errorTitle: String { get }
     
     var cellViewModels: [MovieListCellViewModel] {get}
-
 }
 
 protocol MoviesListViewModelProtocol: MoviesListViewModelInput, MoviesListViewModelOutput {}
 
 final class MovieListViewModel: MoviesListViewModelProtocol {
- 
+    
     //MARK:- Variable & Constants:-
     private let useCase: FetchRecentMoviesUseCase
+    private let actions: MovieListViewModelActions?
     private var movies: [MovieListCellViewModel] = []
+    
     var cellViewModels: [MovieListCellViewModel] = []
-    var isSearching = false
-
+    
     // MARK: - OUTPUT
-
+    
     var successResponse: (() -> Void)?
     var errorResponse: ((String) -> Void)?
     
     var loading: ((Bool) -> ())!
     var isRefresh: ((Bool) -> ())!
-
-    let screenTitle = NSLocalizedString("Movies", comment: "")
-    let errorTitle = NSLocalizedString("Error", comment: "")
+    var isSearching = false
+    
+    let screenTitle = "Movies"
+    let errorTitle = "Error"
     
     // MARK: - Init
     
-    init(useCase: FetchRecentMoviesUseCase) {
+    init(useCase: FetchRecentMoviesUseCase, actions: MovieListViewModelActions? = nil) {
         self.useCase = useCase
+        self.actions = actions
     }
     
     //MARK: - Private Methods
     //MARK:- NetWork
     
-     func fetchMovies() {
+    func fetchMovies() {
         self.loading?(true)
         useCase.fetchRecentMovies()
             .done(on: .main) { [weak self] model in
@@ -82,7 +90,7 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
     private func handle(error: Error) {
         self.errorResponse?(error.localizedDescription )
     }
-
+    
 }
 // MARK: - INPUT. View event methods
 
@@ -97,16 +105,21 @@ extension MovieListViewModel {
         
         cellViewModels = movies.filter { movie in
             if let movieTitle = movie.title {
-                return movieTitle.lowercased().prefix(searchText.count) == searchText.lowercased()
+                return movieTitle.lowercased().contains(searchText.lowercased())
+                
             }
             return false
         }
         self.successResponse?()
     }
+    
     func didCancelSearch() {
         isSearching =  false
         cellViewModels = movies
         self.successResponse?()
     }
+    
+    func didSelectMovieAt(index: Int) {
+        actions?.showMovieDetails(cellViewModels[index])
+    }
 }
-

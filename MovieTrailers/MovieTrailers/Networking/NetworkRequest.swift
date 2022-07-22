@@ -37,7 +37,7 @@ extension INetworkRequest {
 }
 
 // MARK: - API class will help to define the APIs in the remote networking when calling from the server
-class NetworkRequest: INetworkRequest {
+struct NetworkRequest: INetworkRequest {
     
     var path: String
     var method: HTTPMethod

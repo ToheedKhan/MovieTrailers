@@ -8,7 +8,7 @@
 import Foundation
 import PromiseKit
 
-class NetworkManger: NetworkManagerProtocol {
+final class NetworkManger: NetworkManagerProtocol {
     
     private let requestCreator: NetworkRequestCreator!
     private let session: URLSession

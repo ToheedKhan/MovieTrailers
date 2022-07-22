@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieRepository: MovieRepositoryProtocol {
+struct MovieRepository: MovieRepositoryProtocol {
     
     private let service: MovieServiceProtocol
     

@@ -15,7 +15,7 @@ var scheme: String {
     return "https"
 }
 
-class NetworkRequestCreator {
+struct NetworkRequestCreator {
     
     func createURLRequest(using endPoint: INetworkRequest) throws -> URLRequest {
         do {

@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 @testable import MovieTrailers
 
-class MockFetchMovieUseCase : FetchRecentMoviesUseCase {
+final class MockFetchMovieUseCase : FetchRecentMoviesUseCase {
     
     var movies: MovieDTO?
     var error: Error?

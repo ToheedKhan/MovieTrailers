@@ -9,7 +9,7 @@ import Foundation
 import PromiseKit
 @testable import MovieTrailers
 
-class MockService: MovieServiceProtocol {
+final class MockService: MovieServiceProtocol {
     
     var movies: MovieDTO?
     var error: Error?

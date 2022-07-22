@@ -125,7 +125,8 @@ extension MovieListViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        guard let cellViewModels = viewModel?.cellViewModels,  !cellViewModels.isEmpty else {
+        guard let movieListViewModel = viewModel, !movieListViewModel.cellViewModels.isEmpty else {
+            guard let movieListViewModel = viewModel, !movieListViewModel.isSearching else { return }
             showAlert(title: "Attention", message: "No Data Found")
             return
         }
@@ -140,7 +141,7 @@ extension MovieListViewController {
 //MARK: - UITableViewDataSource
 extension MovieListViewController: UITableViewDataSource {
     
-    fileprivate func setupTableView(){
+    private func setupTableView(){
         self.tableView.isHidden = false
         
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -176,26 +177,13 @@ extension MovieListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        //Navigate to detail page
+        viewModel?.didSelectMovieAt(index: indexPath.row)
+
         // Remove highlight from the selected cell
         tableView.deselectRow(at: indexPath, animated: true)
         // Close keyboard when you select cell
         self.searchBar.searchTextField.endEditing(true)
-    }
-}
-
-//MARK: - Navigation
-
-extension MovieListViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "ShowDetail" {
-            
-            if let destinationViewController = segue.destination as? MovieDetailViewController
-            {
-                let indexPath = self.tableView.indexPathForSelectedRow!
-                destinationViewController.viewModel = MovieDetailViewModel(movie: viewModel?.cellViewModels[indexPath.row] ?? nil)
-            }
-        }
     }
 }
 

@@ -23,7 +23,7 @@ class StubGenerator {
 }
 
 
-class MockData {
+struct MockData {
     static func mockMovieResponseData() -> Data {
         let encoded = try! JSONEncoder().encode(StubGenerator().stubMovies())
         return encoded

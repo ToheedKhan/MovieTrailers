@@ -5,10 +5,9 @@
 //  Created by Toheed Jahan Khan on 14/07/22.
 //
 
-import Foundation
 import UIKit
 
-class AppContainer {
+class AppCoordinator {
     
     lazy var networkManager: NetworkManagerProtocol = {
         let networkManager = NetworkManger(requestCreator: NetworkRequestCreator())
@@ -17,12 +16,15 @@ class AppContainer {
     
     // Starting app here only we could separate out the Files if we need
     
-    func startApp(on window: UIWindow?) {
-        let module = MovieModule(networkManager: networkManager)
-        let controller = module.createMovieListViewController()
-        let nvc: UINavigationController = UINavigationController(rootViewController: controller)
-        window?.rootViewController = nvc
+    func start(on window: UIWindow?) {
+        let navigationController = UINavigationController()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        
+        let module = MovieModule(networkManager: networkManager)
+        let movieFlow = module.createMovieFlowCoordinator(navigationController: navigationController)
+            movieFlow.start()
+        
+        
     }
-    
 }

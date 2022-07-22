@@ -10,7 +10,7 @@ import PromiseKit
 @testable import MovieTrailers
 
 
-class MockMovieRepository: MovieRepositoryProtocol {
+final class MockMovieRepository: MovieRepositoryProtocol {
     var movies: MovieDTO?
     var error: Error?
 

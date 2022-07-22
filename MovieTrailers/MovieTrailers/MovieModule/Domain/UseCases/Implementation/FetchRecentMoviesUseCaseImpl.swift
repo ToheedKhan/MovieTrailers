@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FetchRecentMoviesUseCaseImpl: FetchRecentMoviesUseCase {
+final class FetchRecentMoviesUseCaseImpl: FetchRecentMoviesUseCase {
     
     private let repository: MovieRepositoryProtocol
     

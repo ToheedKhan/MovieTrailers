@@ -23,6 +23,10 @@ class FetchMovieUseCaseTest: XCTestCase {
         fetchMovieUseCase = FetchRecentMoviesUseCaseImpl(repository: repository)
     }
     
+    override func tearDown() {
+        fetchMovieUseCase = nil
+    }
+    
     func testUseCase_Success() {
         let promise = expectation(description: "Movie use case on success")
         

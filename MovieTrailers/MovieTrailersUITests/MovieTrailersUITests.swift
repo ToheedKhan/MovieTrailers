@@ -83,29 +83,6 @@ class MovieTrailersUITests: XCTestCase {
             XCTAssert(false, "Was not able to find any table cells")
         }
     }
-    
-//        func testOpenMovieDetails_whenSearchDogAndTapOnFirstResultRow_thenMovieDetailsViewOpensWithTitleDog() {
-//
-//            let app = XCUIApplication()
-//
-//            // Search for Dog
-//            let searchText = "Dog"
-//            let x = app.searchFields[MovieSceneAccessibilityIdentifier.searchField]
-//            app.searchFields[MovieSceneAccessibilityIdentifier.searchField].tap()
-//            if !app.keys["A"].waitForExistence(timeout: 10) {
-//                XCTFail("The keyboard could not be found. Use keyboard shortcut COMMAND + SHIFT + K while simulator has focus on text input")
-//            }
-//            _ = app.searchFields[MovieSceneAccessibilityIdentifier.searchField].waitForExistence(timeout: 15)
-//            app.searchFields[MovieSceneAccessibilityIdentifier.searchField].typeText(searchText)
-//            app.buttons["search"].tap()
-//
-//            // Tap on first result row
-//            app.tables.cells.staticTexts[searchText].tap()
-//
-//            // Make sure movie details view
-//            XCTAssertTrue(app.otherElements[MovieSceneAccessibilityIdentifier.movieDetailsView].waitForExistence(timeout: 5))
-//            XCTAssertTrue(app.navigationBars[searchText].waitForExistence(timeout: 5))
-//        }
 }
 
 extension XCUIElement {
