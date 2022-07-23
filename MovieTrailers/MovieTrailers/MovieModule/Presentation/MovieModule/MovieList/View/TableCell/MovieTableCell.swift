@@ -8,7 +8,7 @@
 import UIKit
 
 
-final class MovieTableCell: UITableViewCell {
+final class MovieTableCell: UITableViewCell, ColorProvider {
     static let reuseIdentifier = String(describing: MovieTableCell.self)
     static let height = (UIDevice.current.userInterfaceIdiom == .pad)
                                              ? CGFloat(170)
@@ -61,16 +61,15 @@ final class MovieTableCell: UITableViewCell {
     }
 
     private func applyColors(){
-        self.movieTitle.textColor = DesignSystem.Colors.blueColor.color
-        self.releaseDate.textColor = DesignSystem.Colors.darkLine.color
-        self.rate.textColor = DesignSystem.Colors.primary.color
-        self.voteCount.textColor = DesignSystem.Colors.darkLine.color
-        self.popularity.textColor = DesignSystem.Colors.darkLine.color
+        self.movieTitle.textColor = blueColor
+        self.releaseDate.textColor = darkLineColor
+        self.rate.textColor = primaryColor
+        self.voteCount.textColor = darkLineColor
+        self.popularity.textColor = darkLineColor
         
-        self.popularityLabel.textColor = DesignSystem.Colors.darkLine.color
-        self.voteCountLabel.textColor = DesignSystem.Colors.darkLine.color
-        self.rateLabel.textColor = DesignSystem.Colors.primary.color
-        
+        self.popularityLabel.textColor = darkLineColor
+        self.voteCountLabel.textColor = darkLineColor
+        self.rateLabel.textColor = primaryColor
     }
 }
 

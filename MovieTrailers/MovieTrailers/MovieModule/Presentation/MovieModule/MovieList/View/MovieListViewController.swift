@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieListViewController: UIViewController, Alertable {
+class MovieListViewController: UIViewController, Alertable, ColorProvider {
     
     //MARK:- Layout:-
     @IBOutlet weak var searchBar: UISearchBar!
@@ -22,6 +22,7 @@ class MovieListViewController: UIViewController, Alertable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        setupViewModel()
         setupResponses()
         viewModel?.getMovies()
     }
@@ -34,7 +35,7 @@ class MovieListViewController: UIViewController, Alertable {
     
     //MARK:- Refresh Update
     @objc func refresh(){
-        viewModel?.isRefresh?(true)
+        viewModel?.isRefresh(true)
         viewModel?.getMovies()
     }
     
@@ -63,7 +64,7 @@ class MovieListViewController: UIViewController, Alertable {
         let searchTextField = self.searchBar.searchTextField
         searchTextField.textColor = UIColor.white
         searchTextField.clearButtonMode = .never
-        searchTextField.backgroundColor = DesignSystem.Colors.pinkColor.color
+        searchTextField.backgroundColor = pinkColor
         
         // Change Glass Icon Color
         let glassIconView = searchTextField.leftView as! UIImageView
@@ -87,7 +88,6 @@ class MovieListViewController: UIViewController, Alertable {
 extension MovieListViewController {
     
     func setupViewModel() {
-       
         viewModel?.loading = { isLoading in
             guard isLoading else{
                 LoadingIndicator.shared.hide()

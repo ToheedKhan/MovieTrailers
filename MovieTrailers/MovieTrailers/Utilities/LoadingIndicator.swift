@@ -11,12 +11,9 @@ class LoadingIndicator: UIView {
     
     public static var shared = LoadingIndicator()
     
-    
-    
     private var indicator : UIActivityIndicatorView =  {
         
         let indicator = UIActivityIndicatorView()
-        indicator.color = DesignSystem.Colors.primary.color
         indicator.backgroundColor = .clear
         
         if #available(iOS 13.0, *) {
@@ -33,7 +30,6 @@ class LoadingIndicator: UIView {
     }()
     
     func show(for view: UIView)  {
-        
         let sizeOfIndicator = view.bounds.size.width / 6.9
         indicator.startAnimating()
         view.addSubview(indicator)

@@ -22,8 +22,8 @@ protocol MoviesListViewModelOutput {
     var successResponse: (() -> Void)? { get set }
     var errorResponse: ((String) -> Void)? { get set }
     
-    var loading :((Bool) ->())! { get set }
-    var isRefresh: ((Bool) -> ())! { get set }
+    var loading :((Bool) ->()) { get set }
+    var isRefresh: ((Bool) -> ()) { get set }
     var isSearching: Bool { get }
 
     var screenTitle: String { get }
@@ -48,8 +48,8 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
     var successResponse: (() -> Void)?
     var errorResponse: ((String) -> Void)?
     
-    var loading: ((Bool) -> ())!
-    var isRefresh: ((Bool) -> ())!
+    var loading :((Bool) ->()) = {_ in}
+    var isRefresh :((Bool) ->()) = {_ in}
     var isSearching = false
     
     let screenTitle = "Movies"
@@ -66,7 +66,7 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
     //MARK:- NetWork
     
     func fetchMovies() {
-        self.loading?(true)
+        self.loading(true)
         useCase.fetchRecentMovies()
             .done(on: .main) { [weak self] model in
                 debugPrint("Success ===> ", model)
@@ -76,8 +76,8 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
                 self?.handle(error: error)
             }
             .finally {
-                self.loading?(false)
-                self.isRefresh?(false)
+                self.loading(false)
+                self.isRefresh(false)
             }
     }
     
@@ -97,7 +97,7 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
 extension MovieListViewModel {
     
     func getMovies() {
-        fetchMovies()
+        self.fetchMovies()
     }
     
     func didSearch(searchText: String) {

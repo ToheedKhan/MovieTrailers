@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MovieDetailViewController: UIViewController {
+final class MovieDetailViewController: UIViewController, ColorProvider {
     
     //MARK:- Layout:-
     
@@ -34,7 +34,7 @@ final class MovieDetailViewController: UIViewController {
     //MARK:- To Load Fonts
     private func loadFontsAndColor(){
         self.overviewTextView.font = UIFont.fonts(name: .meduim, size: .size_l)
-        self.overviewTextView.textColor = DesignSystem.Colors.primary.color
+        self.overviewTextView.textColor = primaryColor
     }
     
     private func setup(){
@@ -44,5 +44,4 @@ final class MovieDetailViewController: UIViewController {
         posterImageView.loadImage(urlString: posterImageUrl)
         self.view.accessibilityIdentifier = MovieSceneAccessibilityIdentifier.movieDetailsView
     }
-    
 }
