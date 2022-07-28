@@ -19,8 +19,8 @@ class MovieListViewModelTest: XCTestCase {
     }
     
     override func tearDown() {
-        super.tearDown()
         movieListViewModel = nil
+        super.tearDown()
     }
     
     func testViewModel_Success() {
@@ -30,7 +30,11 @@ class MovieListViewModelTest: XCTestCase {
         movieListViewModel?.successResponse = {
             promise.fulfill()
         }
-        wait(for: [promise], timeout: 20)
+        waitForExpectations(timeout: 5) { error in
+            if let error = error {
+                XCTFail("waitForExpectations testViewModelSuccess case Failed - errored: \(error)")
+            }
+        }
     }
     
     func testViewModel_Fail() {
@@ -43,26 +47,31 @@ class MovieListViewModelTest: XCTestCase {
             
             promise.fulfill()
         }
-        wait(for: [promise], timeout: 10.0)
+        waitForExpectations(timeout: 5) { error in
+            if let error = error {
+                XCTFail("waitForExpectations testViewModelFail case Failed - errored: \(error)")
+            }
+        }
     }
     
     func testSearchMovie() {
+        let searchExpectation = XCTestExpectation(description: "searchExpectation")
+        
         let searchText = "Sonic"
         movieUseCase.movies = StubGenerator().stubMovies()
         movieListViewModel?.getMovies()
         var isMovieHasPrefix: Bool =  false
-        let searchExpectation = XCTestExpectation(description: "searchExpectation")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [self] in
             movieListViewModel?.didSearch(searchText: searchText)
-
+            
             if let movieTitle = self.movieListViewModel?.cellViewModels.first?.title {
                 isMovieHasPrefix =  movieTitle.hasPrefix(searchText)
-
+                
             }
             searchExpectation.fulfill()
         })
-        
         wait(for: [searchExpectation], timeout: 5)
+        
         XCTAssertTrue(isMovieHasPrefix, "Movie Found")
     }
     
@@ -80,4 +89,3 @@ class MovieListViewModelTest: XCTestCase {
         XCTAssertEqual(movieUseCase.movies?.movies.count, movieListViewModel?.cellViewModels.count)
     }
 }
-

@@ -38,6 +38,7 @@ class MovieServiceTest: XCTestCase {
                 }
             }
             .catch { _ in
+                XCTFail("testService_Success failed")
                 promise.fulfill()
             }
         wait(for: [promise], timeout: 2.0)
@@ -53,5 +54,4 @@ class MovieServiceTest: XCTestCase {
             }
         wait(for: [promise], timeout: 2.0)
     }
-    
 }

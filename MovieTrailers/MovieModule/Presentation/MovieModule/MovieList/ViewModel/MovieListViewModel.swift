@@ -31,8 +31,11 @@ protocol MoviesListViewModelOutput {
     
     var cellViewModels: [MovieListCellViewModel] {get}
 }
-
-protocol MoviesListViewModelProtocol: MoviesListViewModelInput, MoviesListViewModelOutput {}
+//Protocol Composition
+//Method 1
+//protocol MoviesListViewModelProtocol: MoviesListViewModelInput, MoviesListViewModelOutput {}
+//Method 2
+ typealias MoviesListViewModelProtocol = MoviesListViewModelInput & MoviesListViewModelOutput
 
 final class MovieListViewModel: MoviesListViewModelProtocol {
     
@@ -81,7 +84,7 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
             }
     }
     
-    private func getData(model: MovieDTO) {
+    private func getData(model: MovieList) {
         movies = model.movies.map(MovieListCellViewModel.init)
         cellViewModels = movies
         self.successResponse?()

@@ -11,7 +11,7 @@ import PromiseKit
 
 final class MockService: MovieServiceProtocol {
     
-    var movies: MovieDTO?
+    var movies: MovieList?
     var error: Error?
     
     func fetchMovieList() -> MovieResponse {

@@ -12,7 +12,7 @@ import PromiseKit
 
 final class MockFetchMovieUseCase : FetchRecentMoviesUseCase {
     
-    var movies: MovieDTO?
+    var movies: MovieList?
     var error: Error?
     
     func fetchRecentMovies() -> MovieResponse {

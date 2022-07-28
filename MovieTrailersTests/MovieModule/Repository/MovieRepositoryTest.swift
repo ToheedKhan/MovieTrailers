@@ -41,6 +41,7 @@ class MovieRepositoryTest: XCTestCase {
                 }
             }
             .catch { _ in
+                XCTFail("testRepository_Success case Failed - movie count is not > 1 after making service call to get movies")
                 promise.fulfill()
             }
         
@@ -59,6 +60,5 @@ class MovieRepositoryTest: XCTestCase {
             }
         
         wait(for: [promise], timeout: 2.0)
-    }
-    
+    }    
 }

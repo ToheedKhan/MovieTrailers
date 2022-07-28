@@ -21,8 +21,8 @@ final class MovieListViewControllerTests: XCTestCase {
     }
     
     override func tearDown() {
-        super.tearDown()
         viewController = nil
+        super.tearDown()
     }
     
     func test_outlets_shouldBeConnected() {

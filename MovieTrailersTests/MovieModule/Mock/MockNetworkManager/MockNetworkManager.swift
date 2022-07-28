@@ -11,7 +11,7 @@ import PromiseKit
 
 final class MockNetworkManager: NetworkManagerProtocol {
     
-    var movies: MovieDTO?
+    var movies: MovieList?
     var error: Error?
     
     func request<T: Decodable>(_ type: T.Type, endPoint: INetworkRequest) -> Response<T> {        return Promise { seal in

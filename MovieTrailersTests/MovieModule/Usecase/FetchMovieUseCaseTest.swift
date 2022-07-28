@@ -25,6 +25,7 @@ class FetchMovieUseCaseTest: XCTestCase {
     
     override func tearDown() {
         fetchMovieUseCase = nil
+        super.tearDown()
     }
     
     func testUseCase_Success() {
@@ -39,7 +40,10 @@ class FetchMovieUseCaseTest: XCTestCase {
                     promise.fulfill()
                 }
             }
-            .catch { _ in }
+            .catch { _ in
+                XCTFail("testUseCase_Success case Failed - movie count is not > 1 after making service call to fetchRecentMovies() from FetchRecentMoviesUseCaseImpl")
+                promise.fulfill()
+            }
         
         wait(for: [promise], timeout: 2.0)
     }

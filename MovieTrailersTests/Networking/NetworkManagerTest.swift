@@ -38,7 +38,7 @@ class NetworkManagerTest: XCTestCase {
         }
         
         let endPoint = NetworkRequest(path: "/movie", method: .get)
-        networkManager.request(MovieDTO.self, endPoint: endPoint)
+        networkManager.request(MovieList.self, endPoint: endPoint)
             .done { model in
                 let movieCount = model.movies.count
                 if movieCount >= 1 {
@@ -46,7 +46,8 @@ class NetworkManagerTest: XCTestCase {
                     promise.fulfill()
                 }
             }.catch { error in
-                XCTFail("Error was not expected: \(error)")
+                XCTFail("test_NetworkClassForSuccess - Movies couldn't fetch successfully. Error was not expected: \(error)")
+                promise.fulfill()
             }
         
         wait(for: [promise], timeout: 1.0)
@@ -57,7 +58,7 @@ class NetworkManagerTest: XCTestCase {
         let promise = expectation(description: "Should get URL Failure")
         
         let endPoint = NetworkRequest(path: "-;@,?:ą", method: .get)
-        networkManager.request(MovieDTO.self, endPoint: endPoint)
+        networkManager.request(MovieList.self, endPoint: endPoint)
             .catch { error in
                 XCTAssertTrue((error as NSError).domain == "URL")
                 promise.fulfill()
@@ -80,11 +81,8 @@ class NetworkManagerTest: XCTestCase {
             .done { model in
                 XCTFail("Success response was not expected.")
             }.catch { error in
-                //XCTFail("Error expected: \(error)")
                 promise.fulfill()
             }
-        
-        
         wait(for: [promise], timeout: 1.0)
     }
     

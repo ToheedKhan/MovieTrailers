@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieDTO: Codable {
+struct MovieList: Codable {
     var movies: [Movie]
    
     enum CodingKeys: String, CodingKey {

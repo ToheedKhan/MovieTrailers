@@ -10,14 +10,17 @@ import Foundation
 
 
 class StubGenerator {
-    func stubMovies() -> MovieDTO {
+    func stubMovies() -> MovieList? {
         let testBundle = Bundle(for: type(of: self))
         
-        let filePath = testBundle.path(forResource: "movie_data", ofType: "json")!
+        guard let filePath = testBundle.path(forResource: "movie_data", ofType: "json") else {
+            debugPrint("movie_data.json file not found in bundle")
+            return nil
+        }
         let data = try! Data(contentsOf: URL(fileURLWithPath: filePath))
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        let movieList = try! decoder.decode(MovieDTO.self, from: data)
+        let movieList = try! decoder.decode(MovieList.self, from: data)
         return movieList
     }
 }

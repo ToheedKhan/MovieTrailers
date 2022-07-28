@@ -19,7 +19,7 @@ struct MovieService: MovieServiceProtocol {
 
     func fetchMovieList() -> MovieResponse {
         let endPoint = NetworkRequest(path: MovieAPIConstants.moviesAPIPath, method: .get, queryParameters:queryParameterToGetMovies())
-        let promise = network.request(MovieDTO.self, endPoint: endPoint)
+        let promise = network.request(MovieList.self, endPoint: endPoint)
         return promise
     }
     

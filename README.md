@@ -13,6 +13,7 @@ User can search movies in displayed list. On tap of table row, user will navigat
 ## Architecture  
 Clean + MVVM
 
+**Presentation Layer -> Domain Layer <- Data Repositories Layer**
 <kbd>
 <img width="733" alt="architecture_diagram" src="https://user-images.githubusercontent.com/4839453/180503348-b4793f3b-e8b3-4675-a101-86009c0c4477.png">
 </kbd>

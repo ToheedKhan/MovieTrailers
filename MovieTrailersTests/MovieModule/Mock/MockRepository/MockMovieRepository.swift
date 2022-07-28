@@ -11,7 +11,7 @@ import PromiseKit
 
 
 final class MockMovieRepository: MovieRepositoryProtocol {
-    var movies: MovieDTO?
+    var movies: MovieList?
     var error: Error?
 
     func makeServiceCallToGetMovies() -> MovieResponse {
