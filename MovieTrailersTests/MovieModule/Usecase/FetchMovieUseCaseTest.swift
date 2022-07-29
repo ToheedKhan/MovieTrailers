@@ -9,7 +9,7 @@ import XCTest
 @testable import MovieTrailers
 
 
-class FetchMovieUseCaseTest: XCTestCase {
+final class FetchMovieUseCaseTest: XCTestCase {
     
     struct ErrorMessage {
         static let kFailedErrorMessage = "Use Case Failed Error"

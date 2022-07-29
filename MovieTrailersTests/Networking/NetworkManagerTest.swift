@@ -8,7 +8,7 @@
 import XCTest
 @testable import MovieTrailers
 
-class NetworkManagerTest: XCTestCase {
+final class NetworkManagerTest: XCTestCase {
     
     var networkManager: NetworkManagerProtocol!
     

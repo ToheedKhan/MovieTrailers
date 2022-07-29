@@ -11,12 +11,12 @@ struct MovieListCellViewModel: Equatable {
     
     //MARK:- Variable:-
     let posterImagePath: String?
-    let title: String?
-    let releaseDate: String?
-    let rate: String?
-    let voteCount: String?
-    let popularity: String?
-    let overview: String?
+    let title: String
+    let releaseDate: String
+    let rate: String
+    let voteCount: String
+    let popularity: String
+    let overview: String
 }
 
 extension MovieListCellViewModel {

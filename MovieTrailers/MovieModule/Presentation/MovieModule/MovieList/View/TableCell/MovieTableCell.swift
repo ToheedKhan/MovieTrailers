@@ -78,8 +78,13 @@ extension MovieTableCell {
     
     //MARK:- Setup & Load Data
     private func setup(){
-        let posterImageUrl = ApplicationConfiguration.imageEndpoint + (cellViewModel?.posterImagePath ?? "")
-        posterImageView.loadImage(urlString: posterImageUrl)
+        //load image
+        if let posterImagePath = cellViewModel?.posterImagePath {
+            posterImageView.loadImage(urlString: ApplicationConfiguration.imageEndpoint + posterImagePath)
+        } else { //To load default image
+            posterImageView.loadImage(urlString: nil)
+        }
+        
         movieTitle.text = cellViewModel?.title
         releaseDate.text = cellViewModel?.releaseDate
         rate.text = cellViewModel?.rate

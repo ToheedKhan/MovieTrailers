@@ -105,14 +105,7 @@ extension MovieListViewModel {
     
     func didSearch(searchText: String) {
         isSearching = true
-        
-        cellViewModels = movies.filter { movie in
-            if let movieTitle = movie.title {
-                return movieTitle.lowercased().contains(searchText.lowercased())
-                
-            }
-            return false
-        }
+        cellViewModels = movies.filter {  $0.title.lowercased().contains(searchText.lowercased())}
         self.successResponse?()
     }
     
