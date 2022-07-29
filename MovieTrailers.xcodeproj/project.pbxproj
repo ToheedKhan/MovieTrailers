@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2862760B2893DC60000E20CB /* MovieCellViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286276092893DC60000E20CB /* MovieCellViewModelTest.swift */; };
+		2862760C2893DC60000E20CB /* MovieListDetailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2862760A2893DC60000E20CB /* MovieListDetailViewModelTest.swift */; };
 		2868F8EC2881CCA900C42447 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2868F8EB2881CCA900C42447 /* MockURLProtocol.swift */; };
 		2868F8EE2881CCE400C42447 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2868F8ED2881CCE300C42447 /* NetworkManagerTest.swift */; };
 		2868F8FA28824AB400C42447 /* MovieDetailViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2868F8F828824AB400C42447 /* MovieDetailViewControllerTest.swift */; };
@@ -91,6 +93,8 @@
 		100E672736F82BE4BF4F8B4F /* Pods-MovieTrailers-MovieTrailersUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieTrailers-MovieTrailersUITests.debug.xcconfig"; path = "Target Support Files/Pods-MovieTrailers-MovieTrailersUITests/Pods-MovieTrailers-MovieTrailersUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		191976587BC99CD704472DF3 /* Pods-MovieTrailers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieTrailers.release.xcconfig"; path = "Target Support Files/Pods-MovieTrailers/Pods-MovieTrailers.release.xcconfig"; sourceTree = "<group>"; };
 		26E3E5879396C79A5E6B136F /* Pods-MovieTrailers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieTrailers.debug.xcconfig"; path = "Target Support Files/Pods-MovieTrailers/Pods-MovieTrailers.debug.xcconfig"; sourceTree = "<group>"; };
+		286276092893DC60000E20CB /* MovieCellViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCellViewModelTest.swift; sourceTree = "<group>"; };
+		2862760A2893DC60000E20CB /* MovieListDetailViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieListDetailViewModelTest.swift; sourceTree = "<group>"; };
 		2868F8EB2881CCA900C42447 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 		2868F8ED2881CCE300C42447 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
 		2868F8F828824AB400C42447 /* MovieDetailViewControllerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewControllerTest.swift; sourceTree = "<group>"; };
@@ -601,8 +605,10 @@
 		28DAAFD928817A4A0033E9EA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				28D163662893984600F45626 /* Quick-Nimble */,
+				286276092893DC60000E20CB /* MovieCellViewModelTest.swift */,
+				2862760A2893DC60000E20CB /* MovieListDetailViewModelTest.swift */,
 				28DAAFF32881915F0033E9EA /* MovieListViewModelTest.swift */,
+				28D163662893984600F45626 /* Quick-Nimble */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -971,6 +977,7 @@
 				2868F8EE2881CCE400C42447 /* NetworkManagerTest.swift in Sources */,
 				28DAAFEA28818F090033E9EA /* MockNetworkManager.swift in Sources */,
 				28DAAFF42881915F0033E9EA /* MovieListViewModelTest.swift in Sources */,
+				2862760B2893DC60000E20CB /* MovieCellViewModelTest.swift in Sources */,
 				2868F8EC2881CCA900C42447 /* MockURLProtocol.swift in Sources */,
 				28DAAFEC288190A50033E9EA /* MockMovieRepository.swift in Sources */,
 				28D1636A2893987500F45626 /* MovieListViewModelSpec.swift in Sources */,
@@ -982,6 +989,7 @@
 				28DAAFE628818CA60033E9EA /* MockFetchMovieUseCase.swift in Sources */,
 				28DAAFDE28817CE60033E9EA /* MockData.swift in Sources */,
 				28D163682893986900F45626 /* MovieListViewControllerSpec.swift in Sources */,
+				2862760C2893DC60000E20CB /* MovieListDetailViewModelTest.swift in Sources */,
 				2868F8FB28824AB400C42447 /* MovieListViewControllerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

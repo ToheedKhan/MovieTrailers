@@ -10,23 +10,29 @@ import XCTest
 
 final class MovieListViewControllerTests: XCTestCase {
     
-    var viewController : MovieListViewController!
+    var viewControllerUnderTest : MovieListViewController!
     
     override func setUp() {
         super.setUp()
         
         let storyboard = UIStoryboard(name: "Movie", bundle: nil)
-        viewController = storyboard.instantiateViewController(identifier: "\(MovieListViewController.self)")
-        viewController.loadViewIfNeeded()
+        viewControllerUnderTest = storyboard.instantiateViewController(identifier: "\(MovieListViewController.self)")
+        viewControllerUnderTest.loadViewIfNeeded()
     }
     
     override func tearDown() {
-        viewController = nil
+        viewControllerUnderTest = nil
         super.tearDown()
     }
     
-    func test_outlets_shouldBeConnected() {
-        XCTAssertNotNil(viewController.tableView, "tableView")
-        XCTAssertNotNil(viewController.searchBar, "searchBar")
+    func testOutletsShouldBeConnected() {
+        XCTAssertNotNil(viewControllerUnderTest.tableView, "tableView")
+        XCTAssertNotNil(viewControllerUnderTest.searchBar, "searchBar")
+    }
+   
+    func testTableViewConformsToTableViewDataSourceProtocol() {
+        XCTAssertTrue(viewControllerUnderTest.conforms(to: UITableViewDataSource.self))
+        XCTAssertTrue(viewControllerUnderTest.responds(to: #selector(viewControllerUnderTest.tableView(_:numberOfRowsInSection:))))
+        XCTAssertTrue(viewControllerUnderTest.responds(to: #selector(viewControllerUnderTest.tableView(_:cellForRowAt:))))
     }
 }

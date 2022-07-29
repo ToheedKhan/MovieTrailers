@@ -8,7 +8,7 @@
 import XCTest
 @testable import MovieTrailers
 
-class MovieServiceTest: XCTestCase {
+final class MovieServiceTest: XCTestCase {
     
     struct ErrorMessage {
         static let kFailedErrorMessage = "Movie fetching failed error"

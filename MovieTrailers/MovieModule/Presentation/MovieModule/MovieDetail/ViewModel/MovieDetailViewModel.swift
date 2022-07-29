@@ -9,12 +9,12 @@ import Foundation
 
 struct MovieDetailViewModel {
     var posterImagePath: String?
-    var overview: String?
-    var movieTitle: String?
+    var overview: String
+    var movieTitle: String
     
-    init(movie: MovieListCellViewModel?) {
-        self.posterImagePath = (movie?.posterImagePath ?? "")
-        self.overview = movie?.overview ?? ""
-        self.movieTitle = movie?.title ?? ""
+    init(movie: MovieListCellViewModel) {
+        self.posterImagePath = movie.posterImagePath
+        self.overview = movie.overview
+        self.movieTitle = movie.title
     }
 }

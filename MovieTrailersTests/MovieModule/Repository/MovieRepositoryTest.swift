@@ -9,7 +9,7 @@ import XCTest
 
 @testable import MovieTrailers
 
-class MovieRepositoryTest: XCTestCase {
+final class MovieRepositoryTest: XCTestCase {
     
     struct ErrorMessage {
         static let kFailedErrorMeesage = "Repository Failed Error"

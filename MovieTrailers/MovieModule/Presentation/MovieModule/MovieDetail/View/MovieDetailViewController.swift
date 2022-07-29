@@ -38,10 +38,14 @@ final class MovieDetailViewController: UIViewController, ColorProvider {
     }
     
     private func setup(){
-        let posterImageUrl = ApplicationConfiguration.imageEndpoint + (viewModel?.posterImagePath ?? "")
         self.navigationItem.title = viewModel?.movieTitle
         self.overviewTextView.text = viewModel?.overview
-        posterImageView.loadImage(urlString: posterImageUrl)
         self.view.accessibilityIdentifier = MovieSceneAccessibilityIdentifier.movieDetailsView
+        //load image
+        if let posterImagePath = viewModel?.posterImagePath {
+            posterImageView.loadImage(urlString: ApplicationConfiguration.imageEndpoint + posterImagePath)
+        } else { //To load default image
+            posterImageView.loadImage(urlString: nil)
+        }
     }
 }
