@@ -51,6 +51,8 @@
 		28BCFE34287DC76E008ECF2B /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BCFE33287DC76E008ECF2B /* MovieService.swift */; };
 		28BCFE36287DC780008ECF2B /* MovieServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BCFE35287DC780008ECF2B /* MovieServiceProtocol.swift */; };
 		28BCFE39287DCC61008ECF2B /* FetchRecentMoviesUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BCFE38287DCC61008ECF2B /* FetchRecentMoviesUseCaseImpl.swift */; };
+		28D163682893986900F45626 /* MovieListViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D163672893986900F45626 /* MovieListViewControllerSpec.swift */; };
+		28D1636A2893987500F45626 /* MovieListViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D163692893987500F45626 /* MovieListViewModelSpec.swift */; };
 		28DAAFDC28817B800033E9EA /* movie_data.json in Resources */ = {isa = PBXBuildFile; fileRef = 28DAAFDB28817B800033E9EA /* movie_data.json */; };
 		28DAAFDE28817CE60033E9EA /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAAFDD28817CE60033E9EA /* MockData.swift */; };
 		28DAAFE628818CA60033E9EA /* MockFetchMovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DAAFE528818CA60033E9EA /* MockFetchMovieUseCase.swift */; };
@@ -136,6 +138,8 @@
 		28BCFE33287DC76E008ECF2B /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
 		28BCFE35287DC780008ECF2B /* MovieServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieServiceProtocol.swift; sourceTree = "<group>"; };
 		28BCFE38287DCC61008ECF2B /* FetchRecentMoviesUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecentMoviesUseCaseImpl.swift; sourceTree = "<group>"; };
+		28D163672893986900F45626 /* MovieListViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieListViewControllerSpec.swift; sourceTree = "<group>"; };
+		28D163692893987500F45626 /* MovieListViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieListViewModelSpec.swift; sourceTree = "<group>"; };
 		28DAAFDB28817B800033E9EA /* movie_data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_data.json; sourceTree = "<group>"; };
 		28DAAFDD28817CE60033E9EA /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		28DAAFE528818CA60033E9EA /* MockFetchMovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFetchMovieUseCase.swift; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 		2868F8F728824AB400C42447 /* VewController */ = {
 			isa = PBXGroup;
 			children = (
+				28D163652893983600F45626 /* Quick-Nimble */,
 				2868F8F828824AB400C42447 /* MovieDetailViewControllerTest.swift */,
 				2868F8F928824AB400C42447 /* MovieListViewControllerTest.swift */,
 			);
@@ -528,6 +533,22 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		28D163652893983600F45626 /* Quick-Nimble */ = {
+			isa = PBXGroup;
+			children = (
+				28D163672893986900F45626 /* MovieListViewControllerSpec.swift */,
+			);
+			path = "Quick-Nimble";
+			sourceTree = "<group>";
+		};
+		28D163662893984600F45626 /* Quick-Nimble */ = {
+			isa = PBXGroup;
+			children = (
+				28D163692893987500F45626 /* MovieListViewModelSpec.swift */,
+			);
+			path = "Quick-Nimble";
+			sourceTree = "<group>";
+		};
 		28DAAFD4288179F90033E9EA /* MovieModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +601,7 @@
 		28DAAFD928817A4A0033E9EA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				28D163662893984600F45626 /* Quick-Nimble */,
 				28DAAFF32881915F0033E9EA /* MovieListViewModelTest.swift */,
 			);
 			path = ViewModel;
@@ -677,6 +699,7 @@
 				28BCFDC5287BD4BC008ECF2B /* Sources */,
 				28BCFDC6287BD4BC008ECF2B /* Frameworks */,
 				28BCFDC7287BD4BC008ECF2B /* Resources */,
+				2897C8C0DA29F25192BDAA20 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -779,6 +802,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2897C8C0DA29F25192BDAA20 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieTrailersTests/Pods-MovieTrailersTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieTrailersTests/Pods-MovieTrailersTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MovieTrailersTests/Pods-MovieTrailersTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3D96586503FF45D6303EF5D4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -933,6 +973,7 @@
 				28DAAFF42881915F0033E9EA /* MovieListViewModelTest.swift in Sources */,
 				2868F8EC2881CCA900C42447 /* MockURLProtocol.swift in Sources */,
 				28DAAFEC288190A50033E9EA /* MockMovieRepository.swift in Sources */,
+				28D1636A2893987500F45626 /* MovieListViewModelSpec.swift in Sources */,
 				28DAAFF0288190F30033E9EA /* MovieServiceTest.swift in Sources */,
 				28DAAFE828818DD40033E9EA /* MockService.swift in Sources */,
 				28DAAFF22881910B0033E9EA /* FetchMovieUseCaseTest.swift in Sources */,
@@ -940,6 +981,7 @@
 				2868F8FA28824AB400C42447 /* MovieDetailViewControllerTest.swift in Sources */,
 				28DAAFE628818CA60033E9EA /* MockFetchMovieUseCase.swift in Sources */,
 				28DAAFDE28817CE60033E9EA /* MockData.swift in Sources */,
+				28D163682893986900F45626 /* MovieListViewControllerSpec.swift in Sources */,
 				2868F8FB28824AB400C42447 /* MovieListViewControllerTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
