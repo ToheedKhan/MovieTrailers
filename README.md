@@ -41,10 +41,17 @@ Clean + MVVM
 </p>
 
 ## Unit Test Cases
-### Coverage
 ### Using **XCTest**
+
+### Coverage
 <kbd>
-<img width="1679" alt="UnitTestCaseCoverage" src="https://user-images.githubusercontent.com/4839453/179353599-32a5f594-d0dd-46f7-be7a-3d2d4d4f55ea.png">
+<img width="1679" alt="UnitTestCaseCoverage%" src="https://user-images.githubusercontent.com/4839453/181727265-79371370-4a39-49ea-95c5-20784397b72e.png">
+</kbd>
+
+### Logs
+
+<kbd>
+<img width="1679" alt="UnitTestCaseLog" src="https://user-images.githubusercontent.com/4839453/181727281-a2180598-d3f7-46f6-8ec5-e9c7c1da6b1e.png">
 </kbd>
 
 ### Using **Quick & Nimble**
