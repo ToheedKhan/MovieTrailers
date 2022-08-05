@@ -16,7 +16,6 @@ struct Movie: Codable, Equatable {
     var posterPath: String?
     var originalLanguage: String?
     var originalTitle: String?
-    var adult: Bool
     var overview: String?
     var releaseDate: String?
 
@@ -24,7 +23,6 @@ struct Movie: Codable, Equatable {
         case id
         case popularity
         case title
-        case adult
         case overview
         case voteCount = "vote_count"
         case voteAverage = "vote_average"

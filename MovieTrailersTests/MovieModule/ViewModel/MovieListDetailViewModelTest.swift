@@ -20,6 +20,7 @@ final class MovieListDetailViewModelTest: XCTestCase {
     }
     
     override func tearDown() {
+        movieUseCase.movies = nil
         movieListViewModel = nil
         super.tearDown()
     }
