@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieListCellViewModel: Equatable {
+struct MovieListCellViewModel: Decodable {
     
     //MARK:- Variable:-
     let posterImagePath: String?

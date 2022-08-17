@@ -91,27 +91,6 @@ final class MovieListViewModelTest: XCTestCase {
         wait(for: [searchExpectation], timeout: 10)
     }
     
-    func testWhenUserSelectAMovie() {
-        //Assuming user is selecting first row
-        let selectMovieExpectation = XCTestExpectation(description: "selectMovieExpectation")
-        
-        movieUseCase.movies = StubGenerator().stubMovies()
-        movieListViewModel?.getMovies()
-        var isMovieHasPrefix: Bool =  false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [self] in
-            movieListViewModel?.didSelectMovieAt(index: 1)
-            
-            if let movieTitle = self.movieListViewModel?.cellViewModels.first?.title {
-                isMovieHasPrefix =  movieTitle.hasPrefix("Doc")
-                
-            }
-            selectMovieExpectation.fulfill()
-        })
-        wait(for: [selectMovieExpectation], timeout: 5)
-        
-        XCTAssertTrue(isMovieHasPrefix, "First Movie selected")
-    }
-    
     func testWhenUserCancelCellViewModelCountShouldBeEqualToTotalMovieCount() {
         movieUseCase.movies = StubGenerator().stubMovies()
         movieListViewModel?.getMovies()

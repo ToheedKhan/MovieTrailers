@@ -40,7 +40,7 @@ final class MovieListCellViewModelTest: XCTestCase {
     }
     
     func testMovieCellViewModelInitializerWhenSomeMovieDetailsNotFound() {
-        let movie = Movie.init(id: 1, popularity: nil, voteCount: nil, voteAverage: nil, title: nil, posterPath: "/test.png", originalLanguage: nil, originalTitle: nil, adult: false, overview: nil, releaseDate: nil)
+        let movie = Movie.init(id: 1, popularity: nil, voteCount: nil, voteAverage: nil, title: nil, posterPath: "/test.png", originalLanguage: nil, originalTitle: nil, overview: nil, releaseDate: nil)
         let cellViewModel = MovieListCellViewModel.init(movie: movie)
         XCTAssertTrue(cellViewModel.title == "")
         XCTAssertTrue(cellViewModel.overview == "")

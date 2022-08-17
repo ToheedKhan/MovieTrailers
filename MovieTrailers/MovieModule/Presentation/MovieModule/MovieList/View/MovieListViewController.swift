@@ -15,6 +15,8 @@ class MovieListViewController: UIViewController, Alertable, ColorProvider {
     
     //MARK:- Variable & Constants:
     var viewModel: MoviesListViewModelProtocol?
+    weak var movieListChildCoordinator: MovieListChildCoordinator?
+
     
     let refreshControl = UIRefreshControl()
     
@@ -136,6 +138,14 @@ extension MovieListViewController {
         guard !error.isEmpty else { return }
         showAlert(title: "Attention", message: "Something went wrong")
     }
+    
+//MARK: - Navigation
+    private func navigateToMovieDetailView(index: Int) {
+        guard let childCoordinator = movieListChildCoordinator,
+            let selectedMovieCellVM = viewModel?.cellViewModels[index] else { return }
+        childCoordinator.navigateToMovieDetailVC(viewModel: selectedMovieCellVM)
+        childCoordinator.navigateToMovieDetailVC(viewModel: selectedMovieCellVM)
+    }
 }
 
 //MARK: - UITableViewDataSource
@@ -178,8 +188,7 @@ extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         //Navigate to detail page
-        viewModel?.didSelectMovieAt(index: indexPath.row)
-
+        navigateToMovieDetailView(index: indexPath.row)
         // Remove highlight from the selected cell
         tableView.deselectRow(at: indexPath, animated: true)
         // Close keyboard when you select cell

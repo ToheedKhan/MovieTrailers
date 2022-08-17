@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieDetailViewModel {
+struct MovieDetailViewModel: Decodable {
     var posterImagePath: String?
     var overview: String
     var movieTitle: String

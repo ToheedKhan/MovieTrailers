@@ -7,15 +7,10 @@
 
 import Foundation
 
-struct MovieListViewModelActions {
-    let showMovieDetails: (MovieListCellViewModel) -> Void
-}
-
 protocol MoviesListViewModelInput {
     func getMovies()
     func didSearch(searchText: String)
     func didCancelSearch()
-    func didSelectMovieAt(index: Int)
 }
 
 protocol MoviesListViewModelOutput {
@@ -41,7 +36,6 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
     
     //MARK:- Variable & Constants:-
     private let useCase: FetchRecentMoviesUseCase
-    private let actions: MovieListViewModelActions?
     private var movies: [MovieListCellViewModel] = []
     
     var cellViewModels: [MovieListCellViewModel] = []
@@ -60,9 +54,8 @@ final class MovieListViewModel: MoviesListViewModelProtocol {
     
     // MARK: - Init
     
-    init(useCase: FetchRecentMoviesUseCase, actions: MovieListViewModelActions? = nil) {
+    init(useCase: FetchRecentMoviesUseCase) {
         self.useCase = useCase
-        self.actions = actions
     }
     
     //MARK: - Private Methods
@@ -113,9 +106,5 @@ extension MovieListViewModel {
         isSearching =  false
         cellViewModels = movies
         self.successResponse?()
-    }
-    
-    func didSelectMovieAt(index: Int) {
-        actions?.showMovieDetails(cellViewModels[index])
     }
 }

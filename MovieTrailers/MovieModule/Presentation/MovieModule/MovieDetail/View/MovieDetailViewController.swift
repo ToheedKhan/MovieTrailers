@@ -19,18 +19,18 @@ final class MovieDetailViewController: UIViewController, ColorProvider {
     
     //MARK:- View Model
     var viewModel: MovieDetailViewModel?
-    
+      
     //MARK:- Life Cycle:-
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad() 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setup()
     }
-    
+ 
     //MARK:- To Load Fonts
     private func loadFontsAndColor(){
         self.overviewTextView.font = UIFont.fonts(name: .meduim, size: .size_l)
