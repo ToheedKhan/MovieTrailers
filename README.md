@@ -1,6 +1,6 @@
 # Movie Trailer App
-This app fetch movies data from [TMDB](https://www.themoviedb.org) and display it in a table view.
-User can search movies in displayed list. On tap of table row, user will navigate to detail screen.
+This app fetch movies data from [TMDB](https://www.themoviedb.org) and display it in a List.
+User can search movies in displayed list by name. Upon movie selection, user will navigate to detail screen.
 
 **TMDB API** is free. You need to sign up to get an API key.
 
@@ -20,22 +20,22 @@ Clean + MVVM
 
 ## Flow Diagram
 <kbd>
-<img width="400" alt="Flow Diagram" src="https://user-images.githubusercontent.com/4839453/179944279-e2a8ebb1-7121-4920-afcc-196ac2967a8b.png">
+<img width="400" alt="Flow Diagram" src="https://user-images.githubusercontent.com/4839453/185610509-2420fb85-a779-4393-b9fe-008983b855a1.png">
 </kbd>
 
 ## Screenshots
 
 <p float="left">
 <kbd>
-<img src="https://user-images.githubusercontent.com/4839453/179341120-f8535b5d-d03d-4920-bdb5-78770e92c582.png" alt="Movie List" title="Movie List" width="414" height="896">
+<img src="https://user-images.githubusercontent.com/4839453/185611207-2e107875-9427-4d51-8338-4ecad8ce20be.png" alt="Movie List" title="Movie List" width="414" height="896">
 </kbd>
 
 <kbd>
-<img src="https://user-images.githubusercontent.com/4839453/179341116-593e4cf4-7c77-4519-a8e9-d5d17f21d3e5.png" alt="Movie Detail" title="Movie Detail" width="414" height="896">
+<img src="https://user-images.githubusercontent.com/4839453/185610956-84341074-f866-4ad9-9e44-3eb0720f7f99.png" alt="Movie Detail" title="Movie Detail" width="414" height="896">
 </kbd>
 
 <kbd>
-<img src="https://user-images.githubusercontent.com/4839453/179341119-19c66491-2436-45ed-aa25-cde8f8ac3646.png" alt="Movie Search" title="Movie Search" width="414" height="896">
+<img src="https://user-images.githubusercontent.com/4839453/185611180-2976bc37-24bf-4200-b161-151c6fc4ae15.png" alt="Movie Search" title="Movie Search" width="414" height="896">
 </kbd>
 
 </p>
