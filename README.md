@@ -15,7 +15,7 @@ Clean + MVVM
 
 **Presentation Layer -> Domain Layer <- Data Repositories Layer**
 <kbd>
-<img width="733" alt="architecture_diagram" src="https://user-images.githubusercontent.com/4839453/180503348-b4793f3b-e8b3-4675-a101-86009c0c4477.png">
+<img width="733" alt="architecture_diagram" src="https://user-images.githubusercontent.com/4839453/185815863-7bbeda56-6c16-4864-98da-b6ef7cf0a790.png">
 </kbd>
 
 ## Flow Diagram
