@@ -11,9 +11,8 @@ User can search movies in displayed list by name. Upon movie selection, user wil
 
 
 ## Architecture  
-Clean + MVVM
+Clean 
 
-**Presentation Layer -> Domain Layer <- Data Repositories Layer**
 <kbd>
 <img width="733" alt="architecture_diagram" src="https://user-images.githubusercontent.com/4839453/185815863-7bbeda56-6c16-4864-98da-b6ef7cf0a790.png">
 </kbd>
