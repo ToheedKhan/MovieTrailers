@@ -6,7 +6,8 @@
 //
 
 import Foundation
+//typealias MovieResponse = Promise<MovieList>
 
 protocol FetchRecentMoviesUseCase {
-    func fetchRecentMovies() -> MovieResponse
+    func fetchRecentMovies() -> MovieResponse //Remove, Change name
 }

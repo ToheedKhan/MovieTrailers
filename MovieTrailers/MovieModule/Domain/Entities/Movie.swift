@@ -32,3 +32,11 @@ struct Movie: Codable, Equatable {
         case releaseDate = "release_date"
     }
 }
+
+struct MovieList: Codable {
+    var movies: [Movie]
+    
+    enum CodingKeys: String, CodingKey {
+        case movies = "results"
+    }
+}

@@ -10,7 +10,9 @@ import UIKit
 protocol Coordinator : AnyObject {
     var navigationController: UINavigationController { get set }
 }
-
+protocol Test: Coordinator {
+    
+}
 protocol ParentCoordinator : Coordinator {
     var navigationController: UINavigationController { get set }
     

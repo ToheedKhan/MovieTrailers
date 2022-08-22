@@ -97,12 +97,15 @@ extension MovieListViewModel {
     }
     
     func didSearch(searchText: String) {
-        isSearching = true
-        cellViewModels = movies.filter {  $0.title.lowercased().contains(searchText.lowercased())}
-        self.successResponse?()
+        DispatchQueue.global(qos: .userInitiated).async { [self] in
+            self.isSearching = true
+            self.cellViewModels = (self.movies.filter {  $0.title.lowercased().contains(searchText.lowercased())})
+            self.successResponse?()
+        }
     }
     
     func didCancelSearch() {
+        guard isSearching else { return }
         isSearching =  false
         cellViewModels = movies
         self.successResponse?()

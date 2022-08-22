@@ -41,23 +41,23 @@ Clean
 -->
 
 <table width="1200">
-  <tr>
-    <td>Display the fetched movies from server in a list </td>
-     <td>On selection navigates to movie detail screen </td>
-     <td>Search locally within the list by movie name</td>
-  </tr>
-  <tr>
-    <td valign="top"><kbd>
+<tr>
+<td>Display the fetched movies from server in a list </td>
+<td>On selection navigates to movie detail screen </td>
+<td>Search locally within the list by movie name</td>
+</tr>
+<tr>
+<td valign="top"><kbd>
 <img src="https://user-images.githubusercontent.com/4839453/185611207-2e107875-9427-4d51-8338-4ecad8ce20be.png" alt="Movie List" title="Movie List" >
 </kbd></td>
-    <td valign="top"><kbd>
+<td valign="top"><kbd>
 <img src="https://user-images.githubusercontent.com/4839453/185610956-84341074-f866-4ad9-9e44-3eb0720f7f99.png" alt="Movie Detail" title="Movie Detail" >
 </kbd></td>
-    <td valign="top"><kbd>
+<td valign="top"><kbd>
 <img src="https://user-images.githubusercontent.com/4839453/185611180-2976bc37-24bf-4200-b161-151c6fc4ae15.png" alt="Movie Search" title="Movie Search">
 </kbd></td>
-  </tr>
- </table>
+</tr>
+</table>
 
 ## Unit Test Cases
 ### Using **XCTest**

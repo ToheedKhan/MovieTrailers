@@ -12,6 +12,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+//        let x = { (index: Int)  in
+//            print("i= \(index).")
+//        }
+        
+        for i in 0..<10 {
+//            x(i)
+            let x = { (index: Int)  in
+                print("i= \(index).")
+            }
+            x(i)
+        }
+
         return true
     }
 

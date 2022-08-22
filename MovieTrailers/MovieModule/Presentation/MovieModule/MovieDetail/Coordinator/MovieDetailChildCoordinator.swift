@@ -19,7 +19,7 @@ final class MovieDetailChildCoordinator : ChildCoordinator {
     }
     
     func configureChildViewController() {
-        let movieDetailVC = MovieDetailBuilder().buildMovieDetailViewController()
+        let movieDetailVC = MovieDetailDI().createMovieDetailViewController()
         if let detailVM = viewModel {
             movieDetailVC.viewModel = detailVM
         }
@@ -28,7 +28,7 @@ final class MovieDetailChildCoordinator : ChildCoordinator {
     
     func passParameter(value: Decodable) {
         guard let vm = value as? MovieListCellViewModel else { return }
-        self.viewModel = MovieDetailBuilder().createMovieDetailViewModel(with: vm)
+        self.viewModel = MovieDetailDI().createMovieDetailViewModel(with: vm)
     }
 }
 

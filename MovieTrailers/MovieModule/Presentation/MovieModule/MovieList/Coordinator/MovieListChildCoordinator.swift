@@ -16,12 +16,9 @@ final class MovieListChildCoordinator : ChildCoordinator {
     }
     
     func configureChildViewController() {
-        
-        if let mainCoordinator = self.parentCoordinator as? MainCoordinator {
-            let movieListVC = MovieListBuilder(networkManager: mainCoordinator.networkManager).buildMovieListViewController()
-            movieListVC.movieListChildCoordinator = self
-            self.navigationController.pushViewController(movieListVC, animated: false)
-        }
+        let movieListVC = MovieListDI(networkManager: AppDI().networkManager).createMovieListViewController()
+        movieListVC.movieListChildCoordinator = self
+        self.navigationController.pushViewController(movieListVC, animated: false)
     }
     
     func navigateToMovieDetailVC(viewModel: MovieListCellViewModel) {

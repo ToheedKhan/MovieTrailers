@@ -1,5 +1,5 @@
 //
-//  MovieDetailBuilder.swift
+//  MovieDetailDI.swift
 //  MovieTrailers
 //
 //  Created by Toheed Jahan Khan on 16/08/22.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct MovieDetailBuilder {
-    func buildMovieDetailViewController() -> MovieDetailViewController {
+struct MovieDetailDI {
+    func createMovieDetailViewController() -> MovieDetailViewController {
         let movieDetailVC = MovieDetailViewController.initialize(on: .main)
         return movieDetailVC
     }

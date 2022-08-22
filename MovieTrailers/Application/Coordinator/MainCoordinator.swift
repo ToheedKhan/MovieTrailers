@@ -8,13 +8,6 @@
 import UIKit
 
 class MainCoordinator : ParentCoordinator {
-    
-    lazy var networkManager: NetworkManagerProtocol = {
-        let networkManager = NetworkManger(requestCreator: NetworkRequestCreator())
-        return networkManager
-    }()
-
-    
     var childCoordinators: [ChildCoordinator] = [ChildCoordinator]()
     
     var navigationController: UINavigationController

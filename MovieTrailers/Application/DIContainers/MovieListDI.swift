@@ -1,5 +1,5 @@
 //
-//  MovieListBuilder.swift
+//  MovieListDI.swift
 //  MovieTrailers
 //
 //  Created by Toheed Jahan Khan on 16/08/22.
@@ -7,14 +7,14 @@
 
 import UIKit
 
-struct MovieListBuilder {
+struct MovieListDI {
     private let networkManager: NetworkManagerProtocol
     
     init(networkManager: NetworkManagerProtocol) {
         self.networkManager = networkManager
     }
     
-    func buildMovieListViewController()-> MovieListViewController {
+    func createMovieListViewController()-> MovieListViewController {
         let viewController = MovieListViewController.initialize(on: .main)
         viewController.viewModel = createMovieListViewModel()
         return viewController

@@ -63,14 +63,16 @@ final class MovieListViewModelTest: XCTestCase {
         var isMovieHasPrefix: Bool =  false
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [self] in
             movieListViewModel?.didSearch(searchText: searchText)
-            
-            if let movieTitle = self.movieListViewModel?.cellViewModels.first?.title {
-                isMovieHasPrefix =  movieTitle.hasPrefix(searchText)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [self] in
                 
-            }
-            searchExpectation.fulfill()
+                if let movieTitle = self.movieListViewModel?.cellViewModels.first?.title {
+                    isMovieHasPrefix =  movieTitle.hasPrefix(searchText)
+                    
+                }
+                searchExpectation.fulfill()
+            })
         })
-        wait(for: [searchExpectation], timeout: 5)
+        wait(for: [searchExpectation], timeout: 10)
         
         XCTAssertTrue(isMovieHasPrefix, "Movie Found")
     }
@@ -83,10 +85,12 @@ final class MovieListViewModelTest: XCTestCase {
         movieListViewModel?.getMovies()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [self] in
             movieListViewModel?.didSearch(searchText: searchText)
-            
-            XCTAssertTrue(movieListViewModel?.cellViewModels.count == 0, "Searched Movie Not Found")
-
-            searchExpectation.fulfill()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [self] in
+                
+                XCTAssertTrue(movieListViewModel?.cellViewModels.count == 0, "Searched Movie Not Found")
+                
+                searchExpectation.fulfill()
+            })
         })
         wait(for: [searchExpectation], timeout: 10)
     }
@@ -97,8 +101,10 @@ final class MovieListViewModelTest: XCTestCase {
         let cancelSearchExpectation = XCTestExpectation(description: "searchExpectation")
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [self] in
             movieListViewModel?.didSearch(searchText: "Sonic")
-            movieListViewModel?.didCancelSearch()
-            cancelSearchExpectation.fulfill()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [self] in
+                movieListViewModel?.didCancelSearch()
+                cancelSearchExpectation.fulfill()
+            })
         })
         
         wait(for: [cancelSearchExpectation], timeout: 5)

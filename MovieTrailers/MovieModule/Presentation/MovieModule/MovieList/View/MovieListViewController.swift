@@ -67,11 +67,18 @@ class MovieListViewController: UIViewController, Alertable, ColorProvider {
         searchTextField.textColor = UIColor.white
         searchTextField.clearButtonMode = .never
         searchTextField.backgroundColor = pinkColor
+        searchTextField.clearButtonMode = .whileEditing
+        
+        //Add action for clear button
+        if let searchTextField = self.searchBar.value(forKey: "searchField") as? UITextField , let clearButton = searchTextField.value(forKey: "_clearButton")as? UIButton {
+            
+            clearButton.addTarget(self, action: #selector(searchBarClearButtonAction), for: .touchUpInside)
+        }
         
         // Change Glass Icon Color
         let glassIconView = searchTextField.leftView as! UIImageView
         glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
-        glassIconView.tintColor = AppTheme.darkishPink
+        glassIconView.tintColor = UIColor.white
         
         if let newPosition = searchTextField.position(from: searchTextField.beginningOfDocument, in: UITextLayoutDirection.down, offset: 50) {
             searchTextField.selectedTextRange = searchTextField.textRange(from: newPosition, to: newPosition)
@@ -83,6 +90,10 @@ class MovieListViewController: UIViewController, Alertable, ColorProvider {
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : AppTheme.darkishPink ?? UIColor.black]
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : AppTheme.darkishPink ?? UIColor.black]
         navigationController?.navigationBar.tintColor = AppTheme.darkishPink
+    }
+    
+    @objc func searchBarClearButtonAction(sender:UIButton){
+        viewModel?.didCancelSearch()
     }
 }
 
@@ -143,7 +154,6 @@ extension MovieListViewController {
     private func navigateToMovieDetailView(index: Int) {
         guard let childCoordinator = movieListChildCoordinator,
             let selectedMovieCellVM = viewModel?.cellViewModels[index] else { return }
-        childCoordinator.navigateToMovieDetailVC(viewModel: selectedMovieCellVM)
         childCoordinator.navigateToMovieDetailVC(viewModel: selectedMovieCellVM)
     }
 }
