@@ -20,7 +20,12 @@ class StubGenerator {
         let data = try! Data(contentsOf: URL(fileURLWithPath: filePath))
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        let movieList = try! decoder.decode(MovieList.self, from: data)
+        do {
+            let movieList = try decoder.decode(MovieList.self, from: data)
+            debugPrint(movieList.movies)
+        } catch let error {
+            debugPrint("error occured while decoding = \(error.localizedDescription)")
+        }
         return movieList
     }
 }
