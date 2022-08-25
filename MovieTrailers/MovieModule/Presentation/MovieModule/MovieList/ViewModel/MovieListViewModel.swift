@@ -98,9 +98,9 @@ extension MovieListViewModel {
     
     func didSearch(searchText: String) {
         DispatchQueue.global(qos: .userInitiated).async { [self] in
-            self.isSearching = true
-            self.cellViewModels = (self.movies.filter {  $0.title.lowercased().contains(searchText.lowercased())})
-            self.successResponse?()
+            isSearching = true
+            cellViewModels = (movies.filter {  $0.title.lowercased().contains(searchText.lowercased())})
+            successResponse?()
         }
     }
     

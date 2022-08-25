@@ -65,7 +65,7 @@ final class MovieListViewModelTest: XCTestCase {
             movieListViewModel?.didSearch(searchText: searchText)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [self] in
                 
-                if let movieTitle = self.movieListViewModel?.cellViewModels.first?.title {
+                if let movieTitle = movieListViewModel?.cellViewModels.first?.title {
                     isMovieHasPrefix =  movieTitle.hasPrefix(searchText)
                     
                 }
