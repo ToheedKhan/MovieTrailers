@@ -7,7 +7,7 @@
 
 import Foundation
 
-final  MockURLProtocol: URLProtocol {
+final class MockURLProtocol: URLProtocol {
     
     static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data?))?
     
