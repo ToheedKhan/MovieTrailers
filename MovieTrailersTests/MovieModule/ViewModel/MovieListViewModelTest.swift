@@ -60,21 +60,20 @@ final class MovieListViewModelTest: XCTestCase {
         let searchText = "Sonic"
         movieUseCase.movies = StubGenerator().stubMovies()
         movieListViewModel?.getMovies()
-        var isMovieHasPrefix: Bool =  false
+        var isMovieTitleContainsSearchedText: Bool =  false
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [self] in
             movieListViewModel?.didSearch(searchText: searchText)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [self] in
                 
                 if let movieTitle = movieListViewModel?.cellViewModels.first?.title {
-                    isMovieHasPrefix =  movieTitle.hasPrefix(searchText)
-                    
+                    isMovieTitleContainsSearchedText =  movieTitle.lowercased().contains(searchText.lowercased())
                 }
                 searchExpectation.fulfill()
             })
         })
         wait(for: [searchExpectation], timeout: 10)
         
-        XCTAssertTrue(isMovieHasPrefix, "Movie Found")
+        XCTAssertTrue(isMovieTitleContainsSearchedText, "Movie Found")
     }
     
     func testSearchMovieNotFoundCase() {

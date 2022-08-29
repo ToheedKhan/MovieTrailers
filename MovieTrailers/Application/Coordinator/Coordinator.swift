@@ -10,9 +10,7 @@ import UIKit
 protocol Coordinator : AnyObject {
     var navigationController: UINavigationController { get set }
 }
-protocol Test: Coordinator {
-    
-}
+
 protocol ParentCoordinator : Coordinator {
     var navigationController: UINavigationController { get set }
     
@@ -25,6 +23,8 @@ protocol ParentCoordinator : Coordinator {
 
 
 protocol ChildCoordinator : Coordinator {
+    var navigationController: UINavigationController { get set }
+
     var parentCoordinator: ParentCoordinator? {get set}
     func configureChildViewController()
     func passParameter(value: Decodable)

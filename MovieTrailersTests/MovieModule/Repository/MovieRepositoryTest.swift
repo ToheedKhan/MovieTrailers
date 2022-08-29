@@ -12,7 +12,7 @@ import XCTest
 final class MovieRepositoryTest: XCTestCase {
     
     struct ErrorMessage {
-        static let kFailedErrorMeesage = "Repository Failed Error"
+        static let kFailedErrorMessage = "Repository Failed Error"
     }
     
     var movieRepository: MovieRepository!
@@ -51,11 +51,11 @@ final class MovieRepositoryTest: XCTestCase {
     func testRepository_Failure() {
         let promise = expectation(description: "Movie Repository on Failed")
         
-        mockService.error = NSError(domain: "com.example.error", code: 0, userInfo: [NSLocalizedDescriptionKey: ErrorMessage.kFailedErrorMeesage])
+        mockService.error = NSError(domain: "com.example.error", code: 0, userInfo: [NSLocalizedDescriptionKey: ErrorMessage.kFailedErrorMessage])
         
         movieRepository.makeServiceCallToGetMovies()
             .catch {error in
-                XCTAssertTrue(error.localizedDescription == ErrorMessage.kFailedErrorMeesage)
+                XCTAssertTrue(error.localizedDescription == ErrorMessage.kFailedErrorMessage)
                 promise.fulfill()
             }
         
