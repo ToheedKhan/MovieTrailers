@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoadingIndicator: UIView {
+final class LoadingIndicator: UIView {
     
     public static var shared = LoadingIndicator()
     

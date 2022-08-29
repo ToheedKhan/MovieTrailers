@@ -35,7 +35,7 @@ enum FontSize: CGFloat {
 
 extension UIFont {
     
-    class func fonts(name: Font , size: FontSize) -> UIFont {
+    static func fonts(name: Font , size: FontSize) -> UIFont {
         return UIFont(name: name.name, size: size.size) ?? UIFont()
     }
 }

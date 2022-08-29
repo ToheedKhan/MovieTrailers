@@ -12,7 +12,7 @@ enum ChildCoordinatorType {
     case movieDetail
 }
 
-class ChildCoordinatorFactory {
+final class ChildCoordinatorFactory {
     static func create(with _navigationController: UINavigationController,
                        type: ChildCoordinatorType) -> ChildCoordinator {
         switch(type) {

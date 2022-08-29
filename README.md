@@ -11,7 +11,9 @@ User can search movies in displayed list by name. Upon movie selection, user wil
 
 
 ## Architecture  
-Clean 
+Clean architecture + MVVM for presentation layer and Coordinator for navigation
+
+Clean architecture help to write reusable, maintainable, highly decoupled and extensible code due to separation of concern using different layers. 
 
 <kbd>
 <img width="733" alt="architecture_diagram" src="https://user-images.githubusercontent.com/4839453/185815863-7bbeda56-6c16-4864-98da-b6ef7cf0a790.png">

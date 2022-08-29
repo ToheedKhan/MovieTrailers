@@ -7,7 +7,7 @@
 
 import XCTest
 
-class MovieTrailersUITests: XCTestCase {
+final class MovieTrailersUITests: XCTestCase {
     
     var app: XCUIApplication!
     
