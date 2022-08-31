@@ -17,14 +17,11 @@ class MovieListViewController: UIViewController, Alertable, ColorProvider {
     var viewModel: IMovieListViewModel?
     weak var movieListChildCoordinator: MovieListChildCoordinator?
 
-    
-    let refreshControl = UIRefreshControl()
-    
+        
     //MARK: - Life Cycle:-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        setupViewModel()
         viewModel?.fetchMovies()
     }
     
@@ -34,12 +31,6 @@ class MovieListViewController: UIViewController, Alertable, ColorProvider {
         //Focus search bar when navigate back to List screen if isSearching is true
         guard let movieListViewModel = viewModel, movieListViewModel.isSearching == true else { return }
         searchBar.searchTextField.becomeFirstResponder()
-    }
-    
-    //MARK: - Refresh Update
-    @objc func refresh(){
-        viewModel?.isRefresh(true)
-        viewModel?.fetchMovies()
     }
     
     // MARK: - Private
@@ -102,26 +93,6 @@ class MovieListViewController: UIViewController, Alertable, ColorProvider {
 
 //MARK: - Setup View Model
 extension MovieListViewController {
-    
-    func setupViewModel() {
-        viewModel?.loading = { isLoading in
-            guard isLoading else{
-                LoadingIndicator.shared.hide()
-                return
-            }
-            LoadingIndicator.shared.show(for: self.view)
-        }
-        
-        viewModel?.isRefresh = { [weak self] (isRefresh) in
-            guard isRefresh else {
-                DispatchQueue.main.async {
-                    self?.refreshControl.endRefreshing()
-                }
-                return
-            }
-        }
-    }
-    
     private func updateItems() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -151,11 +122,6 @@ extension MovieListViewController: UITableViewDataSource {
     
     private func setupTableView(){
         self.tableView.isHidden = false
-        
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        
-        tableView.addSubview(refreshControl)
         self.tableView.tableFooterView = UIView()
     }
     

@@ -12,9 +12,7 @@ final class MovieListViewModelImpl: IMovieListViewModel {
     //MARK:- Variable & Constants:-
     private let useCase: FetchRecentMoviesUseCase
     private var movies: [MovieListCellViewModel] = []
-    
-    var loading :((Bool) ->()) = {_ in}
-    var isRefresh :((Bool) ->()) = {_ in}
+
     var isSearching = false
     
     let screenTitle = "Movies"
@@ -36,7 +34,6 @@ final class MovieListViewModelImpl: IMovieListViewModel {
     //MARK:- NetWork
     
     func fetchMovies() {
-        self.loading(true)
         useCase.fetchRecentMovies()
             .done(on: .main) { [weak self] domainModelDTO in
                 debugPrint("Success ===> ", domainModelDTO)
@@ -47,8 +44,6 @@ final class MovieListViewModelImpl: IMovieListViewModel {
                 self?.outputDelegate?.handleError(error.localizedDescription)
             }
             .finally {
-                self.loading(false)
-                self.isRefresh(false)
             }
     }
     

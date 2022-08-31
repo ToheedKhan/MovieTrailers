@@ -8,8 +8,6 @@
 import Foundation
 
 protocol IMovieListViewModel {
-    var loading :((Bool) ->()) { get set }
-    var isRefresh: ((Bool) -> ()) { get set }
     var isSearching: Bool { get }
     
     var screenTitle: String { get }
