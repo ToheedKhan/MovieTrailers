@@ -6,16 +6,16 @@
 //
 
 import Foundation
-
 import PromiseKit
+
 @testable import MovieTrailers
 
 final class MockFetchMovieUseCase : FetchRecentMoviesUseCase {
     
-    var movies: MovieList?
+    var movies: MovieListDomainDTO?
     var error: Error?
     
-    func fetchRecentMovies() -> Promise<MovieList> {
+    func fetchRecentMovies() -> MovieListDomainData {
         return Promise { seal in
             if let error = error {
                 seal.reject(error)

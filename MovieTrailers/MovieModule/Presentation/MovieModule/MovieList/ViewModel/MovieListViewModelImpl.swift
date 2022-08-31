@@ -22,7 +22,7 @@ final class MovieListViewModelImpl: IMovieListViewModel {
     
     var movieCellViewModels: [MovieListCellViewModel] = []
     
-    var outputDelegate: MovieListViewModelOutput?
+    weak var outputDelegate: MovieListViewModelOutput?
     
     // MARK: - Init
     
@@ -38,8 +38,9 @@ final class MovieListViewModelImpl: IMovieListViewModel {
     func fetchMovies() {
         self.loading(true)
         useCase.fetchRecentMovies()
-            .done(on: .main) { [weak self] model in
-                debugPrint("Success ===> ", model)
+            .done(on: .main) { [weak self] domainModelDTO in
+                debugPrint("Success ===> ", domainModelDTO)
+                let model = domainModelDTO.toPresentation()
                 self?.getData(model: model)
             }
             .catch(on: .main, policy: .allErrors) { [weak self] error in

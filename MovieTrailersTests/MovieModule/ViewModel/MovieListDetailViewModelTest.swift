@@ -10,13 +10,13 @@ import XCTest
 
 
 final class MovieListDetailViewModelTest: XCTestCase {
-    var movieListViewModel: IMovieListViewModel?
+    var movieListViewModel: MovieListViewModelImpl?
     var movieUseCase = MockFetchMovieUseCase()
     
     override func setUp() {
         super.setUp()
-        movieListViewModel = MovieListViewModel(useCase: movieUseCase)
-        movieUseCase.movies = StubGenerator().stubMovies()
+        movieListViewModel = MovieListViewModelImpl(useCase: movieUseCase, outputDelegate: nil)
+        movieUseCase.movies = MockData.domainMovies
     }
     
     override func tearDown() {
@@ -26,7 +26,7 @@ final class MovieListDetailViewModelTest: XCTestCase {
     }
     
     func testMovieDetailViewModelInitializer() {
-        guard let movie = movieUseCase.movies?.movies.first else {
+        guard let moviesList = movieUseCase.movies?.toPresentation(), let movie = moviesList.movies.first else {
             XCTFail("MovieDetailViewModelInitializer test failed - No movie found to initialize cell")
             return
         }

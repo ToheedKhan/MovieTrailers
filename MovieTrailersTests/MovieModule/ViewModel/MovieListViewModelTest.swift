@@ -27,7 +27,7 @@ final class MovieListViewModelTest: XCTestCase {
     
     func testViewModel_Success() {
         promise = expectation(description: "Should get success")
-        movieUseCase.movies = MockData.movieList
+        movieUseCase.movies = MockData.domainMovies
         movieListViewModel?.fetchMovies()
       
         waitForExpectations(timeout: 5) { error in
@@ -53,7 +53,7 @@ final class MovieListViewModelTest: XCTestCase {
         let searchExpectation = XCTestExpectation(description: "searchExpectation")
         
         let searchText = "Sonic"
-        movieUseCase.movies = MockData.movieList
+        movieUseCase.movies = MockData.domainMovies
         movieListViewModel?.outputDelegate = nil
         movieListViewModel?.fetchMovies()
         var isMovieTitleContainsSearchedText: Bool =  false
@@ -76,7 +76,7 @@ final class MovieListViewModelTest: XCTestCase {
         let searchExpectation = XCTestExpectation(description: "searchExpectation")
         
         let searchText = "Topp"
-        movieUseCase.movies = MockData.movieList
+        movieUseCase.movies = MockData.domainMovies
         movieListViewModel?.outputDelegate = nil
 
         movieListViewModel?.fetchMovies()
@@ -95,7 +95,7 @@ final class MovieListViewModelTest: XCTestCase {
     func testWhenUserCancelCellViewModelCountShouldBeEqualToTotalMovieCount() {
         let cancelSearchExpectation = XCTestExpectation(description: "searchExpectation")
 
-        movieUseCase.movies = MockData.movieList
+        movieUseCase.movies = MockData.domainMovies
         movieListViewModel?.outputDelegate = nil
 
         movieListViewModel?.fetchMovies()

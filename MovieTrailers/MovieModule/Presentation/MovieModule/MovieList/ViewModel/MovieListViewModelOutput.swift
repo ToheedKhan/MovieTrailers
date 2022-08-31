@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol MovieListViewModelOutput {
+protocol MovieListViewModelOutput: AnyObject {
     func handleSuccess()
     func handleError(_ error: String)
 }

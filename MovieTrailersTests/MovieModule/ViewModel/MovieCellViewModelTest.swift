@@ -15,7 +15,7 @@ final class MovieListCellViewModelTest: XCTestCase {
     override func setUp() {
         super.setUp()
         movieListViewModel = MovieListViewModelImpl(useCase: movieUseCase, outputDelegate: nil)
-        movieUseCase.movies = MockData.movieList
+        movieUseCase.movies = MockData.domainMovies
     }
     
     override func tearDown() {
@@ -25,8 +25,8 @@ final class MovieListCellViewModelTest: XCTestCase {
     }
     
     func testMovieListCellViewModelInitializer() {
-        guard let movie = movieUseCase.movies?.movies.first else {
-            XCTFail("MovieListCellViewModelInitializer test failed - No movie found to initialize cell")
+        guard let moviesList = movieUseCase.movies?.toPresentation(), let movie = moviesList.movies.first else {
+            XCTFail("MovieDetailViewModelInitializer test failed - No movie found to initialize cell")
             return
         }
         let cellViewModel = MovieListCellViewModel.init(movie: movie)
