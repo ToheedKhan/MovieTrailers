@@ -9,13 +9,13 @@ import XCTest
 @testable import MovieTrailers
 
 final class MovieListCellViewModelTest: XCTestCase {
-    var movieListViewModel: MovieListViewModel?
+    var movieListViewModel: IMovieListViewModel?
     var movieUseCase = MockFetchMovieUseCase()
     
     override func setUp() {
         super.setUp()
-        movieListViewModel = MovieListViewModel(useCase: movieUseCase)
-        movieUseCase.movies = StubGenerator().stubMovies()
+        movieListViewModel = MovieListViewModelImpl(useCase: movieUseCase, outputDelegate: nil)
+        movieUseCase.movies = MockData.movieList
     }
     
     override func tearDown() {

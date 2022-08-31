@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 final class FetchRecentMoviesUseCaseImpl: FetchRecentMoviesUseCase {
     
@@ -15,7 +16,14 @@ final class FetchRecentMoviesUseCaseImpl: FetchRecentMoviesUseCase {
         self.repository = repository
     }
     
-    func fetchRecentMovies() -> MovieResponse {
-        return repository.makeServiceCallToGetMovies()
+    func fetchRecentMovies() -> Promise<MovieList> {
+        return Promise {seal in
+            repository.makeServiceCallToGetMovies().done(on: .main) { domainModelDTO in
+                seal.fulfill(domainModelDTO.toPresentation())
+            }
+            .catch(on: .main, policy: .allErrors) { error in
+                seal.reject(error)
+            }
+        }
     }
 }

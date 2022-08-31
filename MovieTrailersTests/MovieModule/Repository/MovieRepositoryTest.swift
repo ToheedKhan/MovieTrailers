@@ -31,7 +31,7 @@ final class MovieRepositoryTest: XCTestCase {
     func testRepository_Success() {
         let promise = expectation(description: "Movie Repository on success")
         
-        mockService.movies = StubGenerator().stubMovies()
+        mockService.movies = MockData.dataMovies
         
         movieRepository.makeServiceCallToGetMovies()
             .done { model in

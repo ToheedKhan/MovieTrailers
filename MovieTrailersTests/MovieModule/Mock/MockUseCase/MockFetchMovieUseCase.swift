@@ -15,7 +15,7 @@ final class MockFetchMovieUseCase : FetchRecentMoviesUseCase {
     var movies: MovieList?
     var error: Error?
     
-    func fetchRecentMovies() -> MovieResponse {
+    func fetchRecentMovies() -> Promise<MovieList> {
         return Promise { seal in
             if let error = error {
                 seal.reject(error)

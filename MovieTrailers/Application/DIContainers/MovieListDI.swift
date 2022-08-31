@@ -16,14 +16,15 @@ struct MovieListDI {
     
     func createMovieListViewController()-> MovieListViewController {
         let viewController = MovieListViewController.initialize(on: .main)
-        viewController.viewModel = createMovieListViewModel()
+        viewController.viewModel = createMovieListViewModel(outputDelegate: viewController)
         return viewController
     }
     
     //MARK: - Private Methods
     
-    private func createMovieListViewModel() -> MoviesListViewModelProtocol {
-        let viewModel = MovieListViewModel(useCase: createMovieUseCase())
+    private func createMovieListViewModel(outputDelegate: MovieListViewModelOutput?) -> IMovieListViewModel {
+        let viewModel = MovieListViewModelImpl(useCase: createMovieUseCase(),
+                                               outputDelegate: outputDelegate)
         return viewModel
     }
     

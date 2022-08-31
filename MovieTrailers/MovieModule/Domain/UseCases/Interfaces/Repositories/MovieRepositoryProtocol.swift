@@ -6,7 +6,10 @@
 //
 
 import Foundation
+import PromiseKit
+
+typealias MovieListDomainData = Promise<MovieListDomainDTO>
 
 protocol MovieRepositoryProtocol {
-    func makeServiceCallToGetMovies() -> MovieResponse
+    func makeServiceCallToGetMovies() -> MovieListDomainData
 }

@@ -6,7 +6,10 @@
 //
 
 import Foundation
+import PromiseKit
+
+typealias MovieDataResponse = Promise<MovieListDataResponseDTO>
 
 protocol MovieServiceProtocol {
-    func fetchMovieList() -> MovieResponse
+    func fetchMovieList() -> MovieDataResponse
 }

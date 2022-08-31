@@ -10,12 +10,14 @@ import XCTest
 
 final class MovieListViewModelTest: XCTestCase {
     
-    var movieListViewModel: MovieListViewModel?
+    private var promise: XCTestExpectation!
+    
+    var movieListViewModel: MovieListViewModelImpl?
     var movieUseCase = MockFetchMovieUseCase()
     
     override func setUp() {
         super.setUp()
-        movieListViewModel = MovieListViewModel(useCase: movieUseCase)
+        movieListViewModel = MovieListViewModelImpl(useCase: movieUseCase, outputDelegate: self)
     }
     
     override func tearDown() {
@@ -24,12 +26,10 @@ final class MovieListViewModelTest: XCTestCase {
     }
     
     func testViewModel_Success() {
-        let promise = expectation(description: "Should get success")
-        movieUseCase.movies = StubGenerator().stubMovies()
-        movieListViewModel?.getMovies()
-        movieListViewModel?.successResponse = {
-            promise.fulfill()
-        }
+        promise = expectation(description: "Should get success")
+        movieUseCase.movies = MockData.movieList
+        movieListViewModel?.fetchMovies()
+      
         waitForExpectations(timeout: 5) { error in
             if let error = error {
                 XCTFail("waitForExpectations testViewModelSuccess case Failed - errored: \(error)")
@@ -38,15 +38,10 @@ final class MovieListViewModelTest: XCTestCase {
     }
     
     func testViewModel_Fail() {
-        let promise = expectation(description: "Should get fail")
+        promise = expectation(description: "Should get fail")
         movieUseCase.error = NSError(domain: "com.example.error", code: 0, userInfo: [NSLocalizedDescriptionKey: "Something went wrong"])
-        movieListViewModel?.getMovies()
-        
-        movieListViewModel?.errorResponse = { error in
-            XCTAssertTrue(error == "Something went wrong")
-            
-            promise.fulfill()
-        }
+        movieListViewModel?.fetchMovies()
+    
         waitForExpectations(timeout: 5) { error in
             if let error = error {
                 XCTFail("waitForExpectations testViewModelFail case Failed - errored: \(error)")
@@ -58,14 +53,15 @@ final class MovieListViewModelTest: XCTestCase {
         let searchExpectation = XCTestExpectation(description: "searchExpectation")
         
         let searchText = "Sonic"
-        movieUseCase.movies = StubGenerator().stubMovies()
-        movieListViewModel?.getMovies()
+        movieUseCase.movies = MockData.movieList
+        movieListViewModel?.outputDelegate = nil
+        movieListViewModel?.fetchMovies()
         var isMovieTitleContainsSearchedText: Bool =  false
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [self] in
             movieListViewModel?.didSearch(searchText: searchText)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [self] in
                 
-                if let movieTitle = movieListViewModel?.cellViewModels.first?.title {
+                if let movieTitle = movieListViewModel?.movieCellViewModels.first?.title {
                     isMovieTitleContainsSearchedText =  movieTitle.lowercased().contains(searchText.lowercased())
                 }
                 searchExpectation.fulfill()
@@ -80,13 +76,15 @@ final class MovieListViewModelTest: XCTestCase {
         let searchExpectation = XCTestExpectation(description: "searchExpectation")
         
         let searchText = "Topp"
-        movieUseCase.movies = StubGenerator().stubMovies()
-        movieListViewModel?.getMovies()
+        movieUseCase.movies = MockData.movieList
+        movieListViewModel?.outputDelegate = nil
+
+        movieListViewModel?.fetchMovies()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [self] in
             movieListViewModel?.didSearch(searchText: searchText)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [self] in
                 
-                XCTAssertTrue(movieListViewModel?.cellViewModels.count == 0, "Searched Movie Not Found")
+                XCTAssertTrue(movieListViewModel?.movieCellViewModels.count == 0, "Searched Movie Not Found")
                 
                 searchExpectation.fulfill()
             })
@@ -95,9 +93,13 @@ final class MovieListViewModelTest: XCTestCase {
     }
     
     func testWhenUserCancelCellViewModelCountShouldBeEqualToTotalMovieCount() {
-        movieUseCase.movies = StubGenerator().stubMovies()
-        movieListViewModel?.getMovies()
         let cancelSearchExpectation = XCTestExpectation(description: "searchExpectation")
+
+        movieUseCase.movies = MockData.movieList
+        movieListViewModel?.outputDelegate = nil
+
+        movieListViewModel?.fetchMovies()
+       
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [self] in
             movieListViewModel?.didSearch(searchText: "Sonic")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [self] in
@@ -107,6 +109,19 @@ final class MovieListViewModelTest: XCTestCase {
         })
         
         wait(for: [cancelSearchExpectation], timeout: 5)
-        XCTAssertEqual(movieUseCase.movies?.movies.count, movieListViewModel?.cellViewModels.count)
+        XCTAssertEqual(movieUseCase.movies?.movies.count, movieListViewModel?.movieCellViewModels.count)
+    }
+}
+
+
+extension MovieListViewModelTest: MovieListViewModelOutput {
+    func handleSuccess() {
+        promise.fulfill()
+    }
+    
+    func handleError(_ error: String) {
+        XCTAssertTrue(error == "Something went wrong")
+        
+        promise.fulfill()
     }
 }

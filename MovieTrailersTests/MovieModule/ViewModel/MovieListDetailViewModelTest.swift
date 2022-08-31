@@ -10,7 +10,7 @@ import XCTest
 
 
 final class MovieListDetailViewModelTest: XCTestCase {
-    var movieListViewModel: MovieListViewModel?
+    var movieListViewModel: IMovieListViewModel?
     var movieUseCase = MockFetchMovieUseCase()
     
     override func setUp() {

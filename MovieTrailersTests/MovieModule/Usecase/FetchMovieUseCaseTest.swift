@@ -31,7 +31,7 @@ final class FetchMovieUseCaseTest: XCTestCase {
     func testUseCase_Success() {
         let promise = expectation(description: "Movie use case on success")
         
-        repository.movies = StubGenerator().stubMovies()
+        repository.movies = MockData.domainMovies
         
         fetchMovieUseCase.fetchRecentMovies()
             .done { model in

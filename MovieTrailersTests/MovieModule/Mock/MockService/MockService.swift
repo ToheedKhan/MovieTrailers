@@ -7,14 +7,15 @@
 
 import Foundation
 import PromiseKit
+
 @testable import MovieTrailers
 
 final class MockService: MovieServiceProtocol {
     
-    var movies: MovieList?
+    var movies: MovieListDataResponseDTO?
     var error: Error?
     
-    func fetchMovieList() -> MovieResponse {
+    func fetchMovieList() -> MovieDataResponse {
         return Promise { seal in
             if let error = error {
                 seal.reject(error)

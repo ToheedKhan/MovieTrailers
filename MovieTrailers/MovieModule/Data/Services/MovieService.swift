@@ -15,15 +15,14 @@ struct MovieService: MovieServiceProtocol {
         self.network = network
     }
     
-    //MARK:- MovieServiceProtocol
-
-    func fetchMovieList() -> MovieResponse {
+    //MARK: - MovieServiceProtocol
+    func fetchMovieList() -> MovieDataResponse {
         let endPoint = NetworkRequest(path: MovieAPIConstants.moviesAPIPath, method: .get, queryParameters:queryParameterToGetMovies())
-        let promise = network.request(MovieList.self, endPoint: endPoint)
+        let promise = network.request(MovieListDataResponseDTO.self, endPoint: endPoint)
         return promise
     }
     
-    //MARK:- Private Methods
+    //MARK: - Private Methods
     private func queryParameterToGetMovies() ->  [String : Any] {
         return ["sort_by" : "popularity.desc", "api_key" : ApplicationConfiguration.apiKey]
     }

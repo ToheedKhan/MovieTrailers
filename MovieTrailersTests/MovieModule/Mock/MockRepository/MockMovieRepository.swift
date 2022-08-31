@@ -11,10 +11,10 @@ import PromiseKit
 
 
 final class MockMovieRepository: MovieRepositoryProtocol {
-    var movies: MovieList?
+    var movies: MovieListDomainDTO?
     var error: Error?
 
-    func makeServiceCallToGetMovies() -> MovieResponse {
+    func makeServiceCallToGetMovies() -> MovieListDomainData {
         return Promise { seal in
             if let error = error {
                 seal.reject(error)

@@ -38,7 +38,7 @@ final class NetworkManagerTest: XCTestCase {
         }
         
         let endPoint = NetworkRequest(path: "/movie", method: .get)
-        networkManager.request(MovieList.self, endPoint: endPoint)
+        networkManager.request(MovieListDataResponseDTO.self, endPoint: endPoint)
             .done { model in
                 let movieCount = model.movies.count
                 if movieCount >= 1 {
@@ -50,7 +50,7 @@ final class NetworkManagerTest: XCTestCase {
                 promise.fulfill()
             }
         
-        wait(for: [promise], timeout: 1.0)
+        wait(for: [promise], timeout: 1000.0)
     }
     
     func test_NetworkClassForURLFailure() {
@@ -58,7 +58,7 @@ final class NetworkManagerTest: XCTestCase {
         let promise = expectation(description: "Should get URL Failure")
         
         let endPoint = NetworkRequest(path: "-;@,?:ą", method: .get)
-        networkManager.request(MovieList.self, endPoint: endPoint)
+        networkManager.request(MovieListDataResponseDTO.self, endPoint: endPoint)
             .catch { error in
                 XCTAssertTrue((error as NSError).domain == "URL")
                 promise.fulfill()
@@ -77,7 +77,7 @@ final class NetworkManagerTest: XCTestCase {
         }
         
         let endPoint = NetworkRequest(path: "/movie", method: .get)
-        networkManager.request(Movie.self, endPoint: endPoint)
+        networkManager.request(MovieDataResponseDTO.self, endPoint: endPoint)
             .done { model in
                 XCTFail("Success response was not expected.")
             }.catch { error in

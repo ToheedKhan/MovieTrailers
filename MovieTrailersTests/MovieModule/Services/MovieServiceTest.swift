@@ -29,7 +29,7 @@ final class MovieServiceTest: XCTestCase {
     
     func testService_Success() {
         let promise = expectation(description: "Movie service on success case")
-        mockNetworkManager.movies = StubGenerator().stubMovies()
+        mockNetworkManager.movies = MockData.dataMovies
         movieService.fetchMovieList()
             .done { model in
                 let moviesCount = model.movies.count

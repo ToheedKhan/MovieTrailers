@@ -9,7 +9,6 @@ import Foundation
 import PromiseKit
 
 typealias Response<T> = Promise<T>
-typealias MovieResponse = Promise<MovieList>
 
 protocol NetworkManagerProtocol {
     func request<T: Decodable>(_ type: T.Type, endPoint: INetworkRequest) -> Response<T>

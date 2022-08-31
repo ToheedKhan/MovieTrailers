@@ -33,7 +33,7 @@ final class NetworkManger: NetworkManagerProtocol {
                 } else {
                     do {
                         guard let receivedData = data else {
-                            return //readseal.reject(error)
+                            return
                         }
                         let decodedObject = try JSONDecoder().decode(type, from: receivedData)
                         seal.fulfill(decodedObject)

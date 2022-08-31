@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 struct MovieRepository: MovieRepositoryProtocol {
     
@@ -15,10 +16,14 @@ struct MovieRepository: MovieRepositoryProtocol {
         self.service = service
     }
     
-    func makeServiceCallToGetMovies() -> MovieResponse {
-        return service.fetchMovieList()
+    func makeServiceCallToGetMovies() -> MovieListDomainData {
+        return Promise {seal in
+            service.fetchMovieList().done(on: .main) { dataModelDTO in
+                seal.fulfill(dataModelDTO.toDomain())
+            }
+            .catch(on: .main, policy: .allErrors) { error in
+                seal.reject(error)
+            }
+        }
     }
-    
 }
-
-

@@ -6,7 +6,8 @@
 //
 
 import Foundation
+import PromiseKit
 
 protocol FetchRecentMoviesUseCase {
-    func fetchRecentMovies() -> MovieResponse
+    func fetchRecentMovies() -> Promise<MovieList>
 }
