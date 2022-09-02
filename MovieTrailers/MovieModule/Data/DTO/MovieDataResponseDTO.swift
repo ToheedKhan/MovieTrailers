@@ -45,13 +45,13 @@ struct MovieDataResponseDTO: Codable {
 
 extension MovieListDataResponseDTO {
     
-    func toDomain() -> MovieListDomainDTO {
+    func toDomain() -> MovieListDomainModel {
         return .init(movies: movies.map({$0.toDomain()}))
     }
 }
 
 extension MovieDataResponseDTO {
-    func toDomain() -> MovieDomainDTO {
+    func toDomain() -> MovieDomainModel {
         return .init(id: self.id,
                      popularity: self.popularity,
                      voteCount: self.voteCount,

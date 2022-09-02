@@ -17,17 +17,6 @@ final class FetchRecentMoviesUseCaseImpl: FetchRecentMoviesUseCase {
     }
     
     func fetchRecentMovies() ->MovieListDomainData {
-        return repository.makeServiceCallToGetMovies()
+        return repository.fetchMovies()
     }
 }
-
-/*
- Promise {seal in
- repository.makeServiceCallToGetMovies().done(on: .main) { domainModelDTO in
- seal.fulfill(domainModelDTO.toPresentation())
- }
- .catch(on: .main, policy: .allErrors) { error in
- seal.reject(error)
- }
- }
- */

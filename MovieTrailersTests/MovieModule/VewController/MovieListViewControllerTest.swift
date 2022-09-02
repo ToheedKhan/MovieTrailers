@@ -17,6 +17,7 @@ final class MovieListViewControllerTests: XCTestCase {
         
         let storyboard = UIStoryboard(name: "Movie", bundle: nil)
         viewControllerUnderTest = storyboard.instantiateViewController(identifier: "\(MovieListViewController.self)")
+        viewControllerUnderTest.viewModel = MovieListViewModelImpl(useCase: MockFetchMovieUseCase(), outputDelegate: nil)
         viewControllerUnderTest.loadViewIfNeeded()
     }
     

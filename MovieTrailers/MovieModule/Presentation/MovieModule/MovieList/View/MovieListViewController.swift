@@ -16,18 +16,17 @@ class MovieListViewController: UIViewController, Alertable, ColorProvider {
     //MARK: - Variable & Constants:
     var viewModel: IMovieListViewModel!
     weak var movieListCoordinator: MovieListCoordinator?
-
         
     //MARK: - Life Cycle:-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        viewModel?.fetchMovies()
+        viewModel.viewDidLoad()
+        setupNavigation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNavigation()
         //Focus search bar when navigate back to List screen if isSearching is true
         guard let movieListViewModel = viewModel, movieListViewModel.isSearching == true else { return }
         searchBar.searchTextField.becomeFirstResponder()
@@ -47,18 +46,12 @@ class MovieListViewController: UIViewController, Alertable, ColorProvider {
         addAccessibilityIdentifier()
     }
     
-    private func setupSearchBar() {
-        // Change the Tint Color
-        self.searchBar.barTintColor = AppTheme.darkishPink
-        self.searchBar.tintColor = UIColor.white
-        // Show/Hide Cancel Button
-        self.searchBar.showsCancelButton = true
-        
+    private func setupSearchBarTextField() {
         // Change TextField Colors
         let searchTextField = self.searchBar.searchTextField
         searchTextField.textColor = UIColor.white
+        searchTextField.backgroundColor = headerLightColor
         searchTextField.clearButtonMode = .never
-        searchTextField.backgroundColor = pinkColor
         searchTextField.clearButtonMode = .whileEditing
         
         //Add action for clear button
@@ -66,41 +59,48 @@ class MovieListViewController: UIViewController, Alertable, ColorProvider {
             
             clearButton.addTarget(self, action: #selector(searchBarClearButtonAction), for: .touchUpInside)
         }
+        // TextField Position
+        if let newPosition = searchTextField.position(from: searchTextField.beginningOfDocument, in: UITextLayoutDirection.down, offset: 50) {
+            searchTextField.selectedTextRange = searchTextField.textRange(from: newPosition, to: newPosition)
+        }
         
         // Change Glass Icon Color
         let glassIconView = searchTextField.leftView as! UIImageView
         glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
         glassIconView.tintColor = UIColor.white
-        
-        if let newPosition = searchTextField.position(from: searchTextField.beginningOfDocument, in: UITextLayoutDirection.down, offset: 50) {
-            searchTextField.selectedTextRange = searchTextField.textRange(from: newPosition, to: newPosition)
-        }
+    }
+    
+    private func setupSearchBar() {
+        setupSearchBarTextField()
+        // Change the Tint Color
+        self.searchBar.barTintColor = AppTheme.primaryTheme
+        self.searchBar.tintColor = UIColor.white
+        // Show/Hide Cancel Button
+        self.searchBar.showsCancelButton = true
         self.searchBar.keyboardAppearance = .dark
     }
     
     private func setupNavigation() {
-        self.navigationItem.title = viewModel?.screenTitle
+        self.navigationItem.title = viewModel.screenTitle
 
-        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : AppTheme.darkishPink ?? UIColor.black]
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : AppTheme.darkishPink ?? UIColor.black]
-        navigationController?.navigationBar.tintColor = AppTheme.darkishPink
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : AppTheme.primaryTheme ?? UIColor.black]
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : AppTheme.primaryTheme ?? UIColor.black]
+        navigationController?.navigationBar.tintColor = AppTheme.primaryTheme
     }
     
     @objc func searchBarClearButtonAction(sender:UIButton){
-        viewModel?.didCancelSearch()
+        viewModel.didCancelSearch()
     }
 }
-
 //MARK: - Setup View Model
 extension MovieListViewController {
-    private func updateItems() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-        guard let movieListViewModel = viewModel, !movieListViewModel.movieCellViewModels.isEmpty else {
-            guard let movieListViewModel = viewModel, !movieListViewModel.isSearching else { return }
+    private func updateMoviesList() {
+        if viewModel.movieCellViewModels.isEmpty && viewModel.isSearching == false {
             showAlert(title: "Attention", message: "No Data Found")
-            return
+        } else {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -125,25 +125,25 @@ extension MovieListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.movieCellViewModels.count ?? 0
+        return viewModel.movieCellViewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //        let cell = tableView.dequeue() as MovieTableCell
         let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableCell.reuseIdentifier) as! MovieTableCell
-        cell.cellViewModel = viewModel?.movieCellViewModels[indexPath.row]
-       
+        cell.cellViewModel = viewModel.movieCellViewModels[indexPath.row]
         return cell
     }
-    
 }
 
 //MARK: - UITableViewDelegate
 
 extension MovieListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return ((viewModel?.movieCellViewModels.isEmpty) != nil)
+        return ((viewModel.movieCellViewModels.isEmpty) == false)
                                           ? MovieTableCell.height
                                           : tableView.frame.height
     }
@@ -164,12 +164,12 @@ extension MovieListViewController: UITableViewDelegate {
 extension MovieListViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        viewModel?.didSearch(searchText: searchText)
-        }
+        viewModel.didSearch(searchText: searchText)
+    }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
-        viewModel?.didCancelSearch()
+        viewModel.didCancelSearch()
         view.endEditing(true)
     }
 }
@@ -179,7 +179,7 @@ extension MovieListViewController: MovieListViewModelOutput {
     
     func handleSuccess() {
         DispatchQueue.main.async {
-            self.updateItems()
+            self.updateMoviesList()
         }
     }
     

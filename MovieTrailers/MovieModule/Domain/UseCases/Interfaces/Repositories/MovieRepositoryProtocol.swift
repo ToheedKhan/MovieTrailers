@@ -8,8 +8,8 @@
 import Foundation
 import PromiseKit
 
-typealias MovieListDomainData = Promise<MovieListDomainDTO>
+typealias MovieListDomainData = Promise<MovieListDomainModel>
 
 protocol MovieRepositoryProtocol {
-    func makeServiceCallToGetMovies() -> MovieListDomainData
+    func fetchMovies() -> MovieListDomainData
 }

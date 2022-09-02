@@ -8,6 +8,6 @@
 import UIKit
 
 struct AppTheme {
-    static let darkishPink = UIColor(named: "darkishPink")
+    static let primaryTheme = UIColor(named: "primaryTheme")
 }
 

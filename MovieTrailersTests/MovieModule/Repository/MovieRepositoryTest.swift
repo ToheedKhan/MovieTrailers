@@ -33,7 +33,7 @@ final class MovieRepositoryTest: XCTestCase {
         
         mockService.movies = MockData.dataMovies
         
-        movieRepository.makeServiceCallToGetMovies()
+        movieRepository.fetchMovies()
             .done { model in
                 let moviesCount = model.movies.count
                 if moviesCount >= 1 {
@@ -53,7 +53,7 @@ final class MovieRepositoryTest: XCTestCase {
         
         mockService.error = NSError(domain: "com.example.error", code: 0, userInfo: [NSLocalizedDescriptionKey: ErrorMessage.kFailedErrorMessage])
         
-        movieRepository.makeServiceCallToGetMovies()
+        movieRepository.fetchMovies()
             .catch {error in
                 XCTAssertTrue(error.localizedDescription == ErrorMessage.kFailedErrorMessage)
                 promise.fulfill()

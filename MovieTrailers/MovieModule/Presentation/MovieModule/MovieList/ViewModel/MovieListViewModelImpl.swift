@@ -33,7 +33,7 @@ final class MovieListViewModelImpl: IMovieListViewModel {
     //MARK: - Private Methods
     //MARK:- NetWork
     
-    func fetchMovies() {
+    private func fetchMovies() {
         useCase.fetchRecentMovies()
             .done(on: .main) { [weak self] domainModelDTO in
                 debugPrint("Success ===> ", domainModelDTO)
@@ -55,7 +55,7 @@ final class MovieListViewModelImpl: IMovieListViewModel {
         
     // MARK: - INPUT. View event methods
     
-    func getMovies() {
+    func viewDidLoad() {
         self.fetchMovies()
     }
     

@@ -8,13 +8,14 @@
 import UIKit
 
 private enum Colors: String {
+    case headerBG = "headerBG"
+    case headerLight = "headerLight"
     case primary = "primary"
+    case primaryBG = "primaryBG"
+    case primaryText = "primaryText"
     case secondary = "secondary"
-    case darkLine = "darkLine"
-    case pinkColor = "pinkColor"
-    case bgColor = "bgColor"
-    case blueColor = "blueColor"
-    case headerBGColor = "headerBGColor"
+    case secondaryText = "secondaryText"
+    case primaryTheme = "primaryTheme"
     
     var color: UIColor {
         return UIColor(named: self.rawValue)!
@@ -22,22 +23,23 @@ private enum Colors: String {
 }
  
 protocol ColorProvider {
-    var primaryColor: UIColor { get }
-    var secondaryColor: UIColor { get }
-    var darkLineColor: UIColor { get }
-    var pinkColor: UIColor { get }
-    var bgColor: UIColor { get }
-    var blueColor: UIColor { get }
     var headerBGColor: UIColor { get }
+    var headerLightColor: UIColor { get }
+    var primaryColor: UIColor { get }
+    var primaryBGColor: UIColor { get }
+    var primaryTextColor: UIColor { get }
+    var secondaryColor: UIColor { get }
+    var secondaryTextColor: UIColor { get }
+    var primaryTheme: UIColor { get }
 }
  
 extension ColorProvider {
+    var headerBGColor: UIColor { return Colors.headerBG.color }
+    var headerLightColor: UIColor { return Colors.headerLight.color }
     var primaryColor: UIColor { return Colors.primary.color }
+    var primaryBGColor: UIColor { return Colors.primaryBG.color }
+    var primaryTextColor: UIColor { return Colors.primaryText.color }
     var secondaryColor: UIColor { return Colors.secondary.color }
-    var darkLineColor: UIColor { return Colors.darkLine.color }
-    var pinkColor: UIColor { return Colors.pinkColor.color }
-    var bgColor: UIColor { return Colors.bgColor.color }
-    var blueColor: UIColor { return Colors.blueColor.color }
-    var headerBGColor: UIColor { return Colors.headerBGColor.color }
+    var secondaryTextColor: UIColor { return Colors.secondaryText.color }
+    var primaryTheme: UIColor { return Colors.primaryTheme.color }
 }
-

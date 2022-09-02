@@ -12,7 +12,6 @@ final class MovieDetailViewController: UIViewController, ColorProvider {
     //MARK:- Layout:-
     
     @IBOutlet weak var posterImageView: UIImageView!
-    
     @IBOutlet weak var overviewTextView: UITextView!
     
     //MARK:- View Model
@@ -39,6 +38,7 @@ final class MovieDetailViewController: UIViewController, ColorProvider {
         self.navigationItem.title = viewModel?.movieTitle
         self.overviewTextView.text = viewModel?.overview
         self.view.accessibilityIdentifier = MovieSceneAccessibilityIdentifier.movieDetailsView
+        posterImageView.addShadoweffect()
         //load image
         if let posterImagePath = viewModel?.posterImagePath {
             posterImageView.loadImage(urlString: ApplicationConfiguration.imageEndpoint + posterImagePath)

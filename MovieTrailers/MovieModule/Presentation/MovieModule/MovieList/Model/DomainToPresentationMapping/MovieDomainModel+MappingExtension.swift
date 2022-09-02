@@ -1,5 +1,5 @@
 //
-//  MovieDomainDTO+MappingExtension.swift
+//  MovieDomainModel+MappingExtension.swift
 //  MovieTrailers
 //
 //  Created by Toheed Jahan Khan on 31/08/22.
@@ -8,14 +8,14 @@
 import Foundation
 
 // Mapping Data to Presentation
-extension MovieListDomainDTO {
+extension MovieListDomainModel {
     
     func toPresentation() -> MovieList {
         return .init(movies: movies.map({$0.toPresentation()}))
     }
 }
 
-extension MovieDomainDTO {
+extension MovieDomainModel {
     func toPresentation() -> Movie {
         return .init(id: self.id,
                      popularity: self.popularity,

@@ -1,5 +1,5 @@
 //
-//  Movie.swift
+//  MovieDomainModel.swift
 //  MovieTrailers
 //
 //  Created by Toheed Jahan Khan on 29/06/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieDomainDTO: Equatable {
+struct MovieDomainModel: Equatable {
     var id: Int
     var popularity: Float?
     var voteCount: Int?
@@ -20,6 +20,6 @@ struct MovieDomainDTO: Equatable {
     var releaseDate: String?
 }
 
-struct MovieListDomainDTO: Equatable {
-    var movies: [MovieDomainDTO]
+struct MovieListDomainModel: Equatable {
+    var movies: [MovieDomainModel]
 }

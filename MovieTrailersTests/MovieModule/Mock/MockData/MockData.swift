@@ -15,7 +15,7 @@ class MockData {
         return try! JSONDecoder().decode(MovieListDataResponseDTO.self, from: mockMovieData)
     }
     
-    static var domainMovies: MovieListDomainDTO? {
+    static var domainMovies: MovieListDomainModel? {
         guard let moviesData = dataMovies else { return nil }
         return moviesData.toDomain()
     }

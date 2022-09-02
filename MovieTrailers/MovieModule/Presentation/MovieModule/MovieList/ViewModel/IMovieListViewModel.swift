@@ -15,7 +15,7 @@ protocol IMovieListViewModel {
     
     var movieCellViewModels: [MovieListCellViewModel] {get}
     
-    func fetchMovies()
+    func viewDidLoad()
     func didSearch(searchText: String)
     func didCancelSearch()
     

@@ -12,7 +12,7 @@ final class MovieListViewModelTest: XCTestCase {
     
     private var promise: XCTestExpectation!
     
-    var movieListViewModel: MovieListViewModelImpl?
+    var movieListViewModel: MovieListViewModelImpl!
     var movieUseCase = MockFetchMovieUseCase()
     
     override func setUp() {
@@ -28,7 +28,7 @@ final class MovieListViewModelTest: XCTestCase {
     func testViewModel_Success() {
         promise = expectation(description: "Should get success")
         movieUseCase.movies = MockData.domainMovies
-        movieListViewModel?.fetchMovies()
+        movieListViewModel.viewDidLoad()
       
         waitForExpectations(timeout: 5) { error in
             if let error = error {
@@ -40,7 +40,7 @@ final class MovieListViewModelTest: XCTestCase {
     func testViewModel_Fail() {
         promise = expectation(description: "Should get fail")
         movieUseCase.error = NSError(domain: "com.example.error", code: 0, userInfo: [NSLocalizedDescriptionKey: "Something went wrong"])
-        movieListViewModel?.fetchMovies()
+        movieListViewModel.viewDidLoad()
     
         waitForExpectations(timeout: 5) { error in
             if let error = error {
@@ -54,14 +54,14 @@ final class MovieListViewModelTest: XCTestCase {
         
         let searchText = "Sonic"
         movieUseCase.movies = MockData.domainMovies
-        movieListViewModel?.outputDelegate = nil
-        movieListViewModel?.fetchMovies()
+        movieListViewModel.outputDelegate = nil
+        movieListViewModel.viewDidLoad()
         var isMovieTitleContainsSearchedText: Bool =  false
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [self] in
-            movieListViewModel?.didSearch(searchText: searchText)
+            movieListViewModel.didSearch(searchText: searchText)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [self] in
                 
-                if let movieTitle = movieListViewModel?.movieCellViewModels.first?.title {
+                if let movieTitle = movieListViewModel.movieCellViewModels.first?.title {
                     isMovieTitleContainsSearchedText =  movieTitle.lowercased().contains(searchText.lowercased())
                 }
                 searchExpectation.fulfill()
@@ -77,9 +77,9 @@ final class MovieListViewModelTest: XCTestCase {
         
         let searchText = "Topp"
         movieUseCase.movies = MockData.domainMovies
-        movieListViewModel?.outputDelegate = nil
+        movieListViewModel.outputDelegate = nil
 
-        movieListViewModel?.fetchMovies()
+        movieListViewModel.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [self] in
             movieListViewModel?.didSearch(searchText: searchText)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [self] in
@@ -96,20 +96,20 @@ final class MovieListViewModelTest: XCTestCase {
         let cancelSearchExpectation = XCTestExpectation(description: "searchExpectation")
 
         movieUseCase.movies = MockData.domainMovies
-        movieListViewModel?.outputDelegate = nil
+        movieListViewModel.outputDelegate = nil
 
-        movieListViewModel?.fetchMovies()
+        movieListViewModel.viewDidLoad()
        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: { [self] in
-            movieListViewModel?.didSearch(searchText: "Sonic")
+            movieListViewModel.didSearch(searchText: "Sonic")
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [self] in
-                movieListViewModel?.didCancelSearch()
+                movieListViewModel.didCancelSearch()
                 cancelSearchExpectation.fulfill()
             })
         })
         
         wait(for: [cancelSearchExpectation], timeout: 5)
-        XCTAssertEqual(movieUseCase.movies?.movies.count, movieListViewModel?.movieCellViewModels.count)
+        XCTAssertEqual(movieUseCase.movies?.movies.count, movieListViewModel.movieCellViewModels.count)
     }
 }
 
