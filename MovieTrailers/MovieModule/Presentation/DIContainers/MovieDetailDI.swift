@@ -8,13 +8,15 @@
 import Foundation
 
 struct MovieDetailDI {
-    func createMovieDetailViewController() -> MovieDetailViewController {
+    func createMovieDetailViewController(selectedMovieCellViewModel: MovieListCellViewModel) -> MovieDetailViewController {
+        let viewModel = createMovieDetailViewModel(with: selectedMovieCellViewModel)
         let movieDetailVC = MovieDetailViewController.initialize(on: .main)
+        movieDetailVC.viewModel = viewModel
         return movieDetailVC
     }
     
     //MARK: - Private Methods
-     func createMovieDetailViewModel(with movieCellViewModel: MovieListCellViewModel) -> MovieDetailViewModel {
+     private func createMovieDetailViewModel(with movieCellViewModel: MovieListCellViewModel) -> MovieDetailViewModel {
         let viewModel = MovieDetailViewModel(movie: movieCellViewModel)
         return viewModel
     }

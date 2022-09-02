@@ -1,14 +1,22 @@
 //
-//  UIViewController+Extension.swift
+//  Storyboarded.swift
 //  MovieTrailers
 //
-//  Created by Toheed Jahan Khan on 14/07/22.
+//  Created by Toheed Jahan Khan on 02/09/22.
 //
 
+import Foundation
 import UIKit
 
-extension ViewControllerUtilities {
-    
+enum Storyboard: String {
+    case main = "Movie"
+}
+
+protocol Storyboarded where Self: UIViewController {
+    static func initialize(on storyboard: Storyboard) -> Self
+}
+
+extension Storyboarded {
     static func initialize(on storyboard: Storyboard) -> Self {
         let storyboard = UIStoryboard(name: storyboard.rawValue, bundle: nil)
         guard let controller = storyboard.instantiateViewController(withIdentifier: String(describing: Self.self)) as? Self else {
@@ -16,7 +24,4 @@ extension ViewControllerUtilities {
         }
         return controller
     }
-    
 }
-
-extension UIViewController: ViewControllerUtilities {}

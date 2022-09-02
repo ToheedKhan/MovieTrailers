@@ -15,20 +15,18 @@ final class MovieDetailViewController: UIViewController, ColorProvider {
     
     @IBOutlet weak var overviewTextView: UITextView!
     
-    //MARK:- Variable & Constants:
-    
     //MARK:- View Model
-    var viewModel: MovieDetailViewModel?
+    var viewModel: MovieDetailViewModel!
       
     //MARK:- Life Cycle:-
     
     override func viewDidLoad() {
-        super.viewDidLoad() 
+        super.viewDidLoad()
+        setup()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setup()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
  
     //MARK:- To Load Fonts

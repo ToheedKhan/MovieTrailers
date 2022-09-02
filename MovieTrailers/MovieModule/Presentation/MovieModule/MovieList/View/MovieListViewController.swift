@@ -14,8 +14,8 @@ class MovieListViewController: UIViewController, Alertable, ColorProvider {
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: - Variable & Constants:
-    var viewModel: IMovieListViewModel?
-    weak var movieListChildCoordinator: MovieListChildCoordinator?
+    var viewModel: IMovieListViewModel!
+    weak var movieListCoordinator: MovieListCoordinator?
 
         
     //MARK: - Life Cycle:-
@@ -111,9 +111,8 @@ extension MovieListViewController {
     
 //MARK: - Navigation
     private func navigateToMovieDetailView(index: Int) {
-        guard let childCoordinator = movieListChildCoordinator,
-            let selectedMovieCellVM = viewModel?.movieCellViewModels[index] else { return }
-        childCoordinator.navigateToMovieDetailVC(viewModel: selectedMovieCellVM)
+        guard let coordinator = movieListCoordinator else { return }
+        coordinator.navigateToMovieDetailVC(viewModel: viewModel.movieCellViewModels[index])
     }
 }
 
