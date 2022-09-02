@@ -12,7 +12,7 @@ final class MovieDetailViewController: UIViewController, ColorProvider {
     //MARK:- Layout:-
     
     @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var overviewTextView: UITextView!
+    @IBOutlet weak var overviewLabel: UILabel!
     
     //MARK:- View Model
     var viewModel: MovieDetailViewModel!
@@ -30,13 +30,13 @@ final class MovieDetailViewController: UIViewController, ColorProvider {
  
     //MARK:- To Load Fonts
     private func loadFontsAndColor(){
-        self.overviewTextView.font = UIFont.fonts(name: .meduim, size: .size_l)
-        self.overviewTextView.textColor = primaryColor
+        self.overviewLabel.font = UIFont.fonts(name: .meduim, size: .size_l)
+        self.overviewLabel.textColor = primaryColor
     }
     
     private func setup(){
-        self.navigationItem.title = viewModel?.movieTitle
-        self.overviewTextView.text = viewModel?.overview
+        self.navigationItem.title = viewModel.movieTitle
+        self.overviewLabel.text = viewModel.overview
         self.view.accessibilityIdentifier = MovieSceneAccessibilityIdentifier.movieDetailsView
         posterImageView.addShadoweffect()
         //load image
