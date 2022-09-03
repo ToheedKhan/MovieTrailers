@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieListViewController: UIViewController, Alertable, ColorProvider {
+class MovieListViewController: UIViewController, Alertable {
     
     //MARK: - Layout:-
     @IBOutlet weak var searchBar: UISearchBar!
@@ -45,39 +45,12 @@ class MovieListViewController: UIViewController, Alertable, ColorProvider {
         setupSearchBar()
         addAccessibilityIdentifier()
     }
-    
-    private func setupSearchBarTextField() {
-        // Change TextField Colors
-        let searchTextField = self.searchBar.searchTextField
-        searchTextField.textColor = UIColor.white
-        searchTextField.backgroundColor = headerLightColor
-        searchTextField.clearButtonMode = .never
-        searchTextField.clearButtonMode = .whileEditing
-        
-        //Add action for clear button
-        if let searchTextField = self.searchBar.value(forKey: "searchField") as? UITextField , let clearButton = searchTextField.value(forKey: "_clearButton")as? UIButton {
-            
-            clearButton.addTarget(self, action: #selector(searchBarClearButtonAction), for: .touchUpInside)
-        }
-        // TextField Position
-        if let newPosition = searchTextField.position(from: searchTextField.beginningOfDocument, in: UITextLayoutDirection.down, offset: 50) {
-            searchTextField.selectedTextRange = searchTextField.textRange(from: newPosition, to: newPosition)
-        }
-        
-        // Change Glass Icon Color
-        let glassIconView = searchTextField.leftView as! UIImageView
-        glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
-        glassIconView.tintColor = UIColor.white
-    }
-    
+ 
     private func setupSearchBar() {
-        setupSearchBarTextField()
-        // Change the Tint Color
-        self.searchBar.barTintColor = AppTheme.primaryTheme
-        self.searchBar.tintColor = UIColor.white
-        // Show/Hide Cancel Button
-        self.searchBar.showsCancelButton = true
-        self.searchBar.keyboardAppearance = .dark
+        self.searchBar.customizeUISearchBarAppereance()
+        self.searchBar.chageGlassIconView(tintColor: UIColor.white)
+        self.searchBar.customizeSearchBarTextFieldPosition(offset: 50)
+        self.searchBar.addClearButton(action: #selector(searchBarClearButtonAction), target: self)
     }
     
     private func setupNavigation() {
@@ -122,6 +95,8 @@ extension MovieListViewController: UITableViewDataSource {
     private func setupTableView(){
         self.tableView.isHidden = false
         self.tableView.tableFooterView = UIView()
+//        tableView.estimatedRowHeight = 185.0
+//        tableView.rowHeight = UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -141,13 +116,13 @@ extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return ((viewModel.movieCellViewModels.isEmpty) == false)
                                           ? MovieTableCell.height
                                           : tableView.frame.height
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         //Navigate to detail page

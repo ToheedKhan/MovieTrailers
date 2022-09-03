@@ -14,7 +14,6 @@ final class MovieTableCell: UITableViewCell, ColorProvider {
                                              : CGFloat(150)
 
     //MARK:- Layout:-
-
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var releaseDate: UILabel!
@@ -39,7 +38,6 @@ final class MovieTableCell: UITableViewCell, ColorProvider {
         if superview != nil {
             // Update the cell
             DispatchQueue.main.async {
-                self.addShadoweffect()
                 self.loadFonts()
                 self.applyColors()
             }
@@ -48,15 +46,15 @@ final class MovieTableCell: UITableViewCell, ColorProvider {
     
     //MARK:- To Load Fonts
     private func loadFonts(){
-        movieTitle.font = UIFont.fonts(name: .semiBold, size: .size_2xl)
-        releaseDate.font = UIFont.fonts(name: .meduim, size: .size_l)
-        rate.font = UIFont.fonts(name: .meduim, size: .size_l)
-        voteCount.font = UIFont.fonts(name: .meduim, size: .size_l)
-        popularity.font = UIFont.fonts(name: .meduim, size: .size_l)
+        movieTitle.font = UIFont.font(weight: .semiBold, size: .title)
+        releaseDate.font = UIFont.font(size: .headline)
+        rate.font = UIFont.font(size: .headline)
+        voteCount.font = UIFont.font(size: .headline)
+        popularity.font = UIFont.font(size: .headline)
         
-        popularityLabel.font = UIFont.fonts(name: .meduim, size: .size_l)
-        rateLabel.font = UIFont.fonts(name: .meduim, size: .size_l)
-        voteCountLabel.font = UIFont.fonts(name: .meduim, size: .size_l)
+        popularityLabel.font = UIFont.font(size: .headline)
+        rateLabel.font = UIFont.font(size: .headline)
+        voteCountLabel.font = UIFont.font(size: .headline)
     }
 
     private func applyColors(){
@@ -65,7 +63,7 @@ final class MovieTableCell: UITableViewCell, ColorProvider {
         rate.textColor = primaryColor
         voteCount.textColor = primaryColor
         popularity.textColor = primaryColor
-        
+
         popularityLabel.textColor = primaryColor
         voteCountLabel.textColor = primaryColor
         rateLabel.textColor = primaryColor

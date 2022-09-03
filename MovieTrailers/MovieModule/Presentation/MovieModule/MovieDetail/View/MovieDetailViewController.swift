@@ -30,7 +30,7 @@ final class MovieDetailViewController: UIViewController, ColorProvider {
  
     //MARK:- To Load Fonts
     private func loadFontsAndColor(){
-        self.overviewLabel.font = UIFont.fonts(name: .meduim, size: .size_l)
+        self.overviewLabel.font = UIFont.font(size: .headline)
         self.overviewLabel.textColor = primaryColor
     }
     

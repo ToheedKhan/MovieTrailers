@@ -8,22 +8,22 @@
 import UIKit
 
 
-enum Font: String {
+enum FontWeight: String {
     
-    case regular = "AvenirNext-Regular"
-    case semiBold = "AvenirNext-DemiBold"
-    case meduim = "AvenirNext-Medium"
-    case bold = "AvenirNext-Bold"
+    case regular = "-Regular"
+    case semiBold = "-DemiBold"
+    case meduim = "-Medium"
+    case bold = "-Bold"
     
-    var name: String { self.rawValue }
+    var weight: String { self.rawValue }
 }
 
 enum FontSize: CGFloat {
-    case size_s = 10
-    case size_m = 12
-    case size_l = 14
-    case size_xl = 16
-    case size_2xl = 20
+    case caption2 = 10
+    case caption1 = 12
+    case headline = 14
+    case subtitle = 16
+    case title = 20
     
     var size: CGFloat {
         if  (UIDevice.current.userInterfaceIdiom == .pad) {
@@ -35,7 +35,9 @@ enum FontSize: CGFloat {
 
 extension UIFont {
     
-    static func fonts(name: Font , size: FontSize) -> UIFont {
-        return UIFont(name: name.name, size: size.size) ?? UIFont()
+    private static let primaryFontFamily = "AvenirNext"
+    
+    static func font(weight: FontWeight = .meduim, size: FontSize) -> UIFont {
+        return UIFont(name: "\(primaryFontFamily)\(weight.rawValue)", size: size.size)!
     }
 }

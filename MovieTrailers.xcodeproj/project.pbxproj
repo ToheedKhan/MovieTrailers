@@ -27,6 +27,7 @@
 		2893405628C1F0B800C23776 /* MovieListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893405528C1F0B800C23776 /* MovieListCoordinator.swift */; };
 		2893405928C1F66B00C23776 /* MovieDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893405828C1F66B00C23776 /* MovieDetailCoordinator.swift */; };
 		2893405B28C2552600C23776 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893405A28C2552600C23776 /* UIView+Extension.swift */; };
+		2893405D28C34F2C00C23776 /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893405C28C34F2C00C23776 /* UISearchBar+Extension.swift */; };
 		2893E2CE287FEDCC000F58CF /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893E2CD287FEDCC000F58CF /* UIViewController+Extension.swift */; };
 		2893E2D2288001E0000F58CF /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893E2D1288001E0000F58CF /* LoadingIndicator.swift */; };
 		2893E2D4288045AD000F58CF /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2893E2D3288045AD000F58CF /* UIImageView+Extension.swift */; };
@@ -110,6 +111,7 @@
 		2893405528C1F0B800C23776 /* MovieListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCoordinator.swift; sourceTree = "<group>"; };
 		2893405828C1F66B00C23776 /* MovieDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailCoordinator.swift; sourceTree = "<group>"; };
 		2893405A28C2552600C23776 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		2893405C28C34F2C00C23776 /* UISearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extension.swift"; sourceTree = "<group>"; };
 		2893E2CD287FEDCC000F58CF /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		2893E2D1288001E0000F58CF /* LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		2893E2D3288045AD000F58CF /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 				2893E2CD287FEDCC000F58CF /* UIViewController+Extension.swift */,
 				2893E2D3288045AD000F58CF /* UIImageView+Extension.swift */,
 				2893405A28C2552600C23776 /* UIView+Extension.swift */,
+				2893405C28C34F2C00C23776 /* UISearchBar+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -838,6 +841,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28BCFE24287D6423008ECF2B /* NetworkManager.swift in Sources */,
+				2893405D28C34F2C00C23776 /* UISearchBar+Extension.swift in Sources */,
 				28BCFDF4287CAEFB008ECF2B /* Font.swift in Sources */,
 				28BCFE2E287D9586008ECF2B /* MovieAPIConstants.swift in Sources */,
 				28BCFDF5287CAEFB008ECF2B /* Colors.swift in Sources */,
