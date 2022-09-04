@@ -37,7 +37,7 @@ extension UIFont {
     
     private static let primaryFontFamily = "AvenirNext"
     
-    static func font(weight: FontWeight = .meduim, size: FontSize) -> UIFont {
+    static func font(weight: FontWeight = .regular, size: FontSize) -> UIFont {
         return UIFont(name: "\(primaryFontFamily)\(weight.rawValue)", size: size.size)!
     }
 }

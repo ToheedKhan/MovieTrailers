@@ -11,6 +11,7 @@ private enum Colors: String {
     case headerBG = "headerBG"
     case headerLight = "headerLight"
     case primary = "primary"
+    case primaryDark = "primaryDark"
     case primaryBG = "primaryBG"
     case primaryText = "primaryText"
     case secondary = "secondary"
@@ -26,6 +27,7 @@ protocol ColorProvider {
     var headerBGColor: UIColor { get }
     var headerLightColor: UIColor { get }
     var primaryColor: UIColor { get }
+    var primaryDarkColor: UIColor { get }
     var primaryBGColor: UIColor { get }
     var primaryTextColor: UIColor { get }
     var secondaryColor: UIColor { get }
@@ -37,6 +39,7 @@ extension ColorProvider {
     var headerBGColor: UIColor { return Colors.headerBG.color }
     var headerLightColor: UIColor { return Colors.headerLight.color }
     var primaryColor: UIColor { return Colors.primary.color }
+    var primaryDarkColor: UIColor { return Colors.primaryDark.color }
     var primaryBGColor: UIColor { return Colors.primaryBG.color }
     var primaryTextColor: UIColor { return Colors.primaryText.color }
     var secondaryColor: UIColor { return Colors.secondary.color }

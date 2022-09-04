@@ -16,7 +16,7 @@ class MovieListViewController: UIViewController, Alertable {
     //MARK: - Variable & Constants:
     var viewModel: IMovieListViewModel!
     weak var movieListCoordinator: MovieListCoordinator?
-        
+    
     //MARK: - Life Cycle:-
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +28,8 @@ class MovieListViewController: UIViewController, Alertable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Focus search bar when navigate back to List screen if isSearching is true
-        guard let movieListViewModel = viewModel, movieListViewModel.isSearching == true else { return }
-        searchBar.searchTextField.becomeFirstResponder()
+        if viewModel.isSearching == true {         searchBar.searchTextField.becomeFirstResponder()
+        }
     }
     
     // MARK: - Private
@@ -45,7 +45,14 @@ class MovieListViewController: UIViewController, Alertable {
         setupSearchBar()
         addAccessibilityIdentifier()
     }
- 
+    
+    private func setupTableView(){
+        self.tableView.isHidden = false
+        self.tableView.tableFooterView = UIView()
+        tableView.estimatedRowHeight = 185.0
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
     private func setupSearchBar() {
         self.searchBar.customizeUISearchBarAppereance()
         self.searchBar.chageGlassIconView(tintColor: UIColor.white)
@@ -55,7 +62,7 @@ class MovieListViewController: UIViewController, Alertable {
     
     private func setupNavigation() {
         self.navigationItem.title = viewModel.screenTitle
-
+        
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : AppTheme.primaryTheme ?? UIColor.black]
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : AppTheme.primaryTheme ?? UIColor.black]
         navigationController?.navigationBar.tintColor = AppTheme.primaryTheme
@@ -71,18 +78,19 @@ extension MovieListViewController {
         if viewModel.movieCellViewModels.isEmpty && viewModel.isSearching == false {
             showAlert(title: "Attention", message: "No Data Found")
         } else {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [self] in
                 self.tableView.reloadData()
             }
         }
     }
     
     private func showError(_ error: String) {
-        guard !error.isEmpty else { return }
-        showAlert(title: "Attention", message: "Something went wrong")
+        if error.isEmpty == false {
+            showAlert(title: "Attention", message: "Something went wrong")
+        }
     }
     
-//MARK: - Navigation
+    //MARK: - Navigation
     private func navigateToMovieDetailView(index: Int) {
         guard let coordinator = movieListCoordinator else { return }
         coordinator.navigateToMovieDetailVC(viewModel: viewModel.movieCellViewModels[index])
@@ -91,38 +99,31 @@ extension MovieListViewController {
 
 //MARK: - UITableViewDataSource
 extension MovieListViewController: UITableViewDataSource {
-    
-    private func setupTableView(){
-        self.tableView.isHidden = false
-        self.tableView.tableFooterView = UIView()
-//        tableView.estimatedRowHeight = 185.0
-//        tableView.rowHeight = UITableView.automaticDimension
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.movieCellViewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableCell.reuseIdentifier) as! MovieTableCell
-        cell.cellViewModel = viewModel.movieCellViewModels[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableCell.reuseIdentifier) as? MovieTableCell else {
+            fatalError()
+        }
+        cell.configure(viewModel: viewModel.movieCellViewModels[indexPath.row])
+        cell.layoutIfNeeded()
+
         return cell
     }
 }
 
 //MARK: - UITableViewDelegate
-
 extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return ((viewModel.movieCellViewModels.isEmpty) == false)
-                                          ? MovieTableCell.height
-                                          : tableView.frame.height
+   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+       return UITableView.automaticDimension
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         //Navigate to detail page

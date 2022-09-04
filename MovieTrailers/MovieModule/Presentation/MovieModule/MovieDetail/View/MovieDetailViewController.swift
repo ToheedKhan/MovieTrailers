@@ -21,26 +21,28 @@ final class MovieDetailViewController: UIViewController, ColorProvider {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        setupUI()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
  
-    //MARK:- To Load Fonts
+    //MARK:- Private Methods
+    //To Load Fonts
     private func loadFontsAndColor(){
         self.overviewLabel.font = UIFont.font(size: .headline)
-        self.overviewLabel.textColor = primaryColor
+        self.overviewLabel.textColor = primaryDarkColor
     }
     
-    private func setup(){
+    private func setupUI(){
         self.navigationItem.title = viewModel.movieTitle
         self.overviewLabel.text = viewModel.overview
         self.view.accessibilityIdentifier = MovieSceneAccessibilityIdentifier.movieDetailsView
         posterImageView.addShadoweffect()
+        loadFontsAndColor()
         //load image
-        if let posterImagePath = viewModel?.posterImagePath {
+        if let posterImagePath = viewModel.posterImagePath {
             posterImageView.loadImage(urlString: ApplicationConfiguration.imageEndpoint + posterImagePath)
         } else { //To load default image
             posterImageView.loadImage(urlString: nil)

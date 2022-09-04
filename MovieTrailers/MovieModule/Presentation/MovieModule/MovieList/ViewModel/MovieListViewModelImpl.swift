@@ -68,9 +68,10 @@ final class MovieListViewModelImpl: IMovieListViewModel {
     }
     
     func didCancelSearch() {
-        guard isSearching else { return }
-        isSearching =  false
-        movieCellViewModels = movies
-        outputDelegate?.handleSuccess()
+        if isSearching == true {
+            isSearching =  false
+            movieCellViewModels = movies
+            outputDelegate?.handleSuccess()
+        }        
     }
 }

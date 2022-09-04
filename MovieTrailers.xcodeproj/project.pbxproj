@@ -334,11 +334,11 @@
 		28BCFDE6287CAD86008ECF2B /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				28BCFDEE287CAEC7008ECF2B /* DesignSystem */,
-				288C215128AB8E0F00B832FD /* AppDIContainers */,
+				28BCFE2B287D89FD008ECF2B /* ApplicationConfiguration.swift */,
 				28BCFDB6287BD4B5008ECF2B /* AppDelegate.swift */,
 				28BCFDB8287BD4B5008ECF2B /* SceneDelegate.swift */,
-				28BCFE2B287D89FD008ECF2B /* ApplicationConfiguration.swift */,
+				28BCFDEE287CAEC7008ECF2B /* DesignSystem */,
+				288C215128AB8E0F00B832FD /* AppDIContainers */,
 			);
 			path = Application;
 			sourceTree = "<group>";
