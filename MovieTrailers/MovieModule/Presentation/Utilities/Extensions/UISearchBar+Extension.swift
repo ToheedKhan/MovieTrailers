@@ -7,17 +7,17 @@
 
 import UIKit
 
-extension UISearchBar: ColorProvider {
+extension UISearchBar {
     func customizeUISearchBarAppereance() {
         // Change the Tint Color
-        self.barTintColor = AppTheme.primaryTheme
+        self.barTintColor = UIColor(named: "header")
         self.tintColor = UIColor.white
         // Show/Hide Cancel Button
         self.showsCancelButton = true
         self.keyboardAppearance = .dark
         // Change TextField Colors
         self.searchTextField.textColor = UIColor.white
-        self.searchTextField.backgroundColor = headerLightColor
+        self.searchTextField.backgroundColor = UIColor(named: "headerLight")
         self.searchTextField.clearButtonMode = .never
         self.searchTextField.clearButtonMode = .whileEditing
     }

@@ -6,12 +6,11 @@
 //
 
 import Foundation
-
+///enum
 struct AppConfigConstants {
     static let APIKey = "APIKey"
     static let APIEndPoint = "APIEndpoint"
     static let ImageEndpoint = "ImageEndpoint"
-    
 }
 
 struct ApplicationConfiguration {

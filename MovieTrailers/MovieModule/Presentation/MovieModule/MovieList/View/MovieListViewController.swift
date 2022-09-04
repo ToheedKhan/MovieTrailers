@@ -63,9 +63,9 @@ class MovieListViewController: UIViewController, Alertable {
     private func setupNavigation() {
         self.navigationItem.title = viewModel.screenTitle
         
-        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : AppTheme.primaryTheme ?? UIColor.black]
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : AppTheme.primaryTheme ?? UIColor.black]
-        navigationController?.navigationBar.tintColor = AppTheme.primaryTheme
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor : UIColor(named: "header") ?? UIColor.black]
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor(named: "header") ?? UIColor.black]
+        navigationController?.navigationBar.tintColor = UIColor(named: "header")
     }
     
     @objc func searchBarClearButtonAction(sender:UIButton){

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MovieDetailViewController: UIViewController, ColorProvider {
+final class MovieDetailViewController: UIViewController {
     
     //MARK:- Layout:-
     
@@ -29,18 +29,11 @@ final class MovieDetailViewController: UIViewController, ColorProvider {
     }
  
     //MARK:- Private Methods
-    //To Load Fonts
-    private func loadFontsAndColor(){
-        self.overviewLabel.font = UIFont.font(size: .headline)
-        self.overviewLabel.textColor = primaryDarkColor
-    }
-    
     private func setupUI(){
         self.navigationItem.title = viewModel.movieTitle
         self.overviewLabel.text = viewModel.overview
         self.view.accessibilityIdentifier = MovieSceneAccessibilityIdentifier.movieDetailsView
         posterImageView.addShadoweffect()
-        loadFontsAndColor()
         //load image
         if let posterImagePath = viewModel.posterImagePath {
             posterImageView.loadImage(urlString: ApplicationConfiguration.imageEndpoint + posterImagePath)
