@@ -12,17 +12,12 @@ final class MovieTableCell: UITableViewCell {
     
     //MARK:- Layout:-
     @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var releaseDate: UILabel!
-    @IBOutlet weak var rate: UILabel!
-    @IBOutlet weak var voteCount: UILabel!
-    @IBOutlet weak var popularity: UILabel!
-    
-    //Text Labels
-    @IBOutlet weak var popularityLabel: UILabel!
-    @IBOutlet weak var voteCountLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var rateLabel: UILabel!
-    
+    @IBOutlet weak var voteCountLabel: UILabel!
+    @IBOutlet weak var popularityLabel: UILabel!
+ 
     func configure(viewModel: MovieListCellViewModel) {
         // load image
         if let posterImagePath = viewModel.posterImagePath {
@@ -32,10 +27,10 @@ final class MovieTableCell: UITableViewCell {
             posterImageView.loadImage(urlString: nil)
         }
         
-        title.text = viewModel.title
-        releaseDate.text = viewModel.releaseDate
-        rate.text = viewModel.rate
-        voteCount.text = viewModel.voteCount
-        popularity.text = viewModel.popularity
+        titleLabel.text = viewModel.title
+        releaseDateLabel.text = viewModel.releaseDate
+        rateLabel.text = viewModel.rate
+        voteCountLabel.text = viewModel.voteCount
+        popularityLabel.text = viewModel.popularity
     }
 }

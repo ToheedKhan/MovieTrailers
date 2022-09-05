@@ -17,7 +17,7 @@ final class NetworkManagerTest: XCTestCase {
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [MockURLProtocol.self]
         let urlSession = URLSession.init(configuration: configuration)
-        networkManager = NetworkManger(requestCreator: NetworkRequestCreator(), session: urlSession)
+        networkManager = NetworkManger(session: urlSession)
     }
     
     override func tearDownWithError() throws {
