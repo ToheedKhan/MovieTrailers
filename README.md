@@ -50,13 +50,13 @@ Clean architecture help to write reusable, maintainable, highly decoupled and ex
 </tr>
 <tr>
 <td valign="top"><kbd>
-<img src="https://user-images.githubusercontent.com/4839453/185611207-2e107875-9427-4d51-8338-4ecad8ce20be.png" alt="Movie List" title="Movie List" >
+<img src="https://user-images.githubusercontent.com/4839453/188343807-568760bc-553d-40a0-b39a-912fb6c252a4.png" alt="Movie List" title="Movie List" >
 </kbd></td>
 <td valign="top"><kbd>
-<img src="https://user-images.githubusercontent.com/4839453/185610956-84341074-f866-4ad9-9e44-3eb0720f7f99.png" alt="Movie Detail" title="Movie Detail" >
+<img src="https://user-images.githubusercontent.com/4839453/188343800-846442a8-ddea-4996-9330-217918ce3da0.png" alt="Movie Detail" title="Movie Detail" >
 </kbd></td>
 <td valign="top"><kbd>
-<img src="https://user-images.githubusercontent.com/4839453/185611180-2976bc37-24bf-4200-b161-151c6fc4ae15.png" alt="Movie Search" title="Movie Search">
+<img src="https://user-images.githubusercontent.com/4839453/188343796-550c02b5-afa2-40b5-b1e1-5a1f08de91d8.png" alt="Movie Search" title="Movie Search">
 </kbd></td>
 </tr>
 </table>
