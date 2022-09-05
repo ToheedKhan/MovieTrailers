@@ -10,23 +10,39 @@ import XCTest
 
 final class MovieDetailViewControllerTests: XCTestCase {
     
-    var viewController : MovieDetailViewController!
+    var viewControllerUnderTest: MovieDetailViewController!
     
     override func setUp() {
         super.setUp()
         
         let storyboard = UIStoryboard(name: "Movie", bundle: nil)
-        viewController = storyboard.instantiateViewController(identifier: "\(MovieDetailViewController.self)")
-        viewController.loadViewIfNeeded()
+        viewControllerUnderTest = storyboard.instantiateViewController(identifier: "\(MovieDetailViewController.self)")
+        
+        self.mockModelData()
+        viewControllerUnderTest.loadViewIfNeeded()
     }
     
     override func tearDown() {
-        viewController = nil
+        viewControllerUnderTest = nil
         super.tearDown()
     }
     
     func test_outlets_shouldBeConnected() {
-        XCTAssertNotNil(viewController.overviewTextView, "overviewTextView")
-        XCTAssertNotNil(viewController.posterImageView, "posterImageView")
+        XCTAssertNotNil(viewControllerUnderTest.overviewLabel, "overviewTextView")
+        XCTAssertNotNil(viewControllerUnderTest.posterImageView, "posterImageView")
+    }
+}
+
+//MARK: - Private Helper
+extension MovieDetailViewControllerTests {
+    private func mockModelData() {
+        let movieUseCase = MockFetchMovieUseCase()
+        movieUseCase.movies = MockData.domainMovies
+        
+        guard let movie = movieUseCase.movies?.toPresentation().movies.first else {
+            XCTFail("MovieDetailViewModelInitializer test failed - No movie found to initialize cell")
+            return
+        }
+        viewControllerUnderTest.viewModel = MovieDetailViewModel.init(movie: MovieListCellViewModel.init(movie: movie))
     }
 }

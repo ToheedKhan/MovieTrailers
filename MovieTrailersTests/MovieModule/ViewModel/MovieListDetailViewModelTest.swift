@@ -26,13 +26,13 @@ final class MovieListDetailViewModelTest: XCTestCase {
     }
     
     func testMovieDetailViewModelInitializer() {
-        guard let moviesList = movieUseCase.movies?.toPresentation(), let movie = moviesList.movies.first else {
+        guard let movie = movieUseCase.movies?.toPresentation().movies.first else {
             XCTFail("MovieDetailViewModelInitializer test failed - No movie found to initialize cell")
             return
         }
         let movieListCellVM = MovieListCellViewModel.init(movie: movie)
         let movieDetailVM = MovieDetailViewModel.init(movie: movieListCellVM)
-        XCTAssertTrue(movieDetailVM.movieTitle == movieListCellVM.title)
+        XCTAssertTrue(movieDetailVM.title == movieListCellVM.title)
         XCTAssertTrue(movieDetailVM.overview == movieListCellVM.overview)
         XCTAssertTrue(movieDetailVM.posterImagePath == movieListCellVM.posterImagePath)
     }

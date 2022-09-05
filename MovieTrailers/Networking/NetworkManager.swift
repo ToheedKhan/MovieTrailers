@@ -10,11 +10,9 @@ import PromiseKit
 
 final class NetworkManger: NetworkManagerProtocol {
     
-    private let requestCreator: NetworkRequestCreator!
     private let session: URLSession
-    
-    init(requestCreator: NetworkRequestCreator, session: URLSession = .shared) {
-        self.requestCreator = requestCreator
+  
+    init(session: URLSession = .shared) {
         self.session = session
     }
     
@@ -22,7 +20,7 @@ final class NetworkManger: NetworkManagerProtocol {
         return Promise { seal in
             var request: URLRequest!
             do {
-                request = try requestCreator.createURLRequest(using: endPoint)
+                request = try endPoint.createURLRequest(using: endPoint)
             } catch {
                 seal.reject(error)
                 return

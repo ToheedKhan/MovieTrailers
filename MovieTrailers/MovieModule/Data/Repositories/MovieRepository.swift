@@ -16,7 +16,7 @@ struct MovieRepository: MovieRepositoryProtocol {
         self.service = service
     }
     
-    func fetchMovies() -> MovieListDomainData {
+    func getMovies() -> MovieListDomainData {
         return Promise {seal in
             service.fetchMovieList().done(on: .main) { dataModelDTO in
                 seal.fulfill(dataModelDTO.toDomain())

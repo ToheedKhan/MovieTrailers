@@ -51,4 +51,3 @@ final class MovieListCellViewModelTest: XCTestCase {
         XCTAssertTrue(cellViewModel.posterImagePath == movie.posterPath)
     }
 }
-

@@ -57,8 +57,6 @@ final class MovieTrailersUITests: XCTestCase {
         
         let tableCells = movieTableView.cells
         XCTAssert(tableCells.element.waitForExistence(timeout: 5.0))
-        //        let cell = tableCells.element(boundBy: 0)
-        //        XCTAssert(cell.waitForExistence(timeout: 5.0))
         
         if tableCells.count > 0 {
             //Loop through only first 2 cell.

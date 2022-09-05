@@ -17,6 +17,6 @@ final class FetchRecentMoviesUseCaseImpl: FetchRecentMoviesUseCase {
     }
     
     func fetchRecentMovies() ->MovieListDomainData {
-        return repository.fetchMovies()
+        return repository.getMovies()
     }
 }

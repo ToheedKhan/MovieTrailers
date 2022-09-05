@@ -16,7 +16,7 @@ final class MovieDetailViewController: UIViewController {
     
     //MARK:- View Model
     var viewModel: MovieDetailViewModel!
-      
+    
     //MARK:- Life Cycle:-
     
     override func viewDidLoad() {
@@ -27,10 +27,10 @@ final class MovieDetailViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
- 
+    
     //MARK:- Private Methods
     private func setupUI(){
-        self.navigationItem.title = viewModel.movieTitle
+        self.navigationItem.title = viewModel.title
         self.overviewLabel.text = viewModel.overview
         self.view.accessibilityIdentifier = MovieSceneAccessibilityIdentifier.movieDetailsView
         posterImageView.addShadoweffect()

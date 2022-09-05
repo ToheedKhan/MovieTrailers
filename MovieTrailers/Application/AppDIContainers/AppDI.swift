@@ -9,7 +9,7 @@ import Foundation
 
 final class AppDI {
     lazy var networkManager: NetworkManagerProtocol = {
-        let networkManager = NetworkManger(requestCreator: NetworkRequestCreator())
+        let networkManager = NetworkManger()
         return networkManager
     }()
 }

@@ -11,5 +11,5 @@ import PromiseKit
 typealias MovieListDomainData = Promise<MovieListDomainModel>
 
 protocol MovieRepositoryProtocol {
-    func fetchMovies() -> MovieListDomainData
+    func getMovies() -> MovieListDomainData
 }

@@ -147,13 +147,13 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="movieTitle" destination="6cQ-Hd-cmG" id="rmZ-3J-9gR"/>
                                             <outlet property="popularity" destination="FWr-xY-1qT" id="vSu-Lu-QNZ"/>
                                             <outlet property="popularityLabel" destination="Q9x-NP-0Fh" id="7UY-wn-5fO"/>
                                             <outlet property="posterImageView" destination="1kN-Eb-XID" id="bSS-fj-bPa"/>
                                             <outlet property="rate" destination="wrL-7R-9oq" id="tJd-KB-omc"/>
                                             <outlet property="rateLabel" destination="wrL-7R-9oq" id="k7z-UC-APG"/>
                                             <outlet property="releaseDate" destination="i8Q-As-UM1" id="a7U-oX-GfS"/>
+                                            <outlet property="title" destination="6cQ-Hd-cmG" id="rmZ-3J-9gR"/>
                                             <outlet property="voteCount" destination="cQ1-lS-1am" id="hG4-cA-WRO"/>
                                             <outlet property="voteCountLabel" destination="u5e-Pz-uAI" id="koc-7w-Dse"/>
                                         </connections>

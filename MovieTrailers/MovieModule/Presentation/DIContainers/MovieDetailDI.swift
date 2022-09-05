@@ -16,7 +16,7 @@ struct MovieDetailDI {
     }
     
     //MARK: - Private Methods
-     private func createMovieDetailViewModel(with movieCellViewModel: MovieListCellViewModel) -> MovieDetailViewModel {
+    private func createMovieDetailViewModel(with movieCellViewModel: MovieListCellViewModel) -> MovieDetailViewModel {
         let viewModel = MovieDetailViewModel(movie: movieCellViewModel)
         return viewModel
     }

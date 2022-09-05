@@ -22,7 +22,7 @@ class MockData {
     
     static var movieList: MovieList? {
         guard let moviesDomain = domainMovies else { return nil }
-
+        
         return moviesDomain.toPresentation()
     }
     

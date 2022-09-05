@@ -14,7 +14,7 @@ final class MockMovieRepository: MovieRepositoryProtocol {
     var movies: MovieListDomainModel?
     var error: Error?
 
-    func fetchMovies() -> MovieListDomainData {
+    func getMovies() -> MovieListDomainData {
         return Promise { seal in
             if let error = error {
                 seal.reject(error)

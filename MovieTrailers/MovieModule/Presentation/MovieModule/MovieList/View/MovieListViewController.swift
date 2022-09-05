@@ -109,7 +109,7 @@ extension MovieListViewController: UITableViewDataSource {
         }
         cell.configure(viewModel: viewModel.movieCellViewModels[indexPath.row])
         cell.layoutIfNeeded()
-
+        
         return cell
     }
 }
@@ -119,9 +119,9 @@ extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-
-   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       return UITableView.automaticDimension
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)

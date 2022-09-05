@@ -12,7 +12,7 @@ final class MovieTableCell: UITableViewCell {
     
     //MARK:- Layout:-
     @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var movieTitle: UILabel!
+    @IBOutlet weak var title: UILabel!
     @IBOutlet weak var releaseDate: UILabel!
     @IBOutlet weak var rate: UILabel!
     @IBOutlet weak var voteCount: UILabel!
@@ -32,7 +32,7 @@ final class MovieTableCell: UITableViewCell {
             posterImageView.loadImage(urlString: nil)
         }
         
-        movieTitle.text = viewModel.title
+        title.text = viewModel.title
         releaseDate.text = viewModel.releaseDate
         rate.text = viewModel.rate
         voteCount.text = viewModel.voteCount

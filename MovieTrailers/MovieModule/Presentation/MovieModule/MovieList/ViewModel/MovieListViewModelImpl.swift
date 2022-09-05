@@ -12,7 +12,7 @@ final class MovieListViewModelImpl: IMovieListViewModel {
     //MARK:- Variable & Constants:-
     private let useCase: FetchRecentMoviesUseCase
     private var movies: [MovieListCellViewModel] = []
-
+    
     var isSearching = false
     
     let screenTitle = "Movies"
@@ -33,7 +33,7 @@ final class MovieListViewModelImpl: IMovieListViewModel {
     //MARK: - Private Methods
     //MARK:- NetWork
     
-    private func fetchMovies() {
+    private func getMovies() {
         useCase.fetchRecentMovies()
             .done(on: .main) { [weak self] domainModelDTO in
                 debugPrint("Success ===> ", domainModelDTO)
@@ -52,11 +52,11 @@ final class MovieListViewModelImpl: IMovieListViewModel {
         movieCellViewModels = movies
         outputDelegate?.handleSuccess()
     }
-        
+    
     // MARK: - INPUT. View event methods
     
     func viewDidLoad() {
-        self.fetchMovies()
+        self.getMovies()
     }
     
     func didSearch(searchText: String) {

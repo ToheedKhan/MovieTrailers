@@ -10,10 +10,12 @@ import Foundation
 protocol INetworkRequest {
     var path: String { get set }
     var method: HTTPMethod { get set }
-    var hostType: RequestHostType { get set }
     var headerParamaters: [String: String] { get set }
     var queryParameters: [String: Any] { get set }
-    var bodyParamaters: [String: Any] { get set }
+}
+
+enum NetworkConstants {
+    static let timeoutInterval = 10.0
 }
 
 enum HTTPMethod: String {
@@ -24,39 +26,54 @@ enum HTTPMethod: String {
     case delete  = "DELETE"
 }
 
-enum RequestHostType: String {
-    case image     = "Image"
-    case data    = "data"
-}
-
-extension INetworkRequest {
-    
-    var scheme: String {
-        return "https"
-    }
-}
-
 // MARK: - API class will help to define the APIs in the remote networking when calling from the server
 struct NetworkRequest: INetworkRequest {
     
     var path: String
     var method: HTTPMethod
-    var hostType: RequestHostType = .data
     var headerParamaters: [String: String]
     var queryParameters: [String: Any]
-    var bodyParamaters: [String: Any]
     
     init(path: String,
          method: HTTPMethod,
-         hostType: RequestHostType = .data,
          headerParamaters: [String: String] = [:],
-         queryParameters: [String: Any] = [:],
-         bodyParamaters: [String: Any] = [:]) {
+         queryParameters: [String: Any] = [:]) {
         self.path = path
         self.method = method
-        self.hostType = hostType
         self.headerParamaters = headerParamaters
         self.queryParameters = queryParameters
-        self.bodyParamaters = bodyParamaters
+    }
+}
+
+//MARK: - For URL creation
+extension INetworkRequest {
+    
+    func createURLRequest(using endPoint: INetworkRequest) throws -> URLRequest {
+        do {
+            let url = try createURL(with: endPoint)
+            var urlRequest = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: NetworkConstants.timeoutInterval)
+            urlRequest.httpMethod = endPoint.method.rawValue
+            endPoint.headerParamaters.forEach({ key, value in
+                urlRequest.setValue(value, forHTTPHeaderField: key)
+            })
+            return urlRequest
+        } catch {
+            throw error
+        }
+    }
+    
+    private func createURL(with endPoint: INetworkRequest) throws -> URL {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = ApplicationConfiguration.apiEndpoint
+        components.path = endPoint.path
+        components.queryItems = endPoint.queryParameters.map {
+            URLQueryItem(name: $0, value: "\($1)")
+        }
+        
+        guard let url = components.url else {
+            throw NSError(domain: "URL", code: NSURLErrorBadURL, userInfo: nil)
+        }
+        return url
     }
 }
