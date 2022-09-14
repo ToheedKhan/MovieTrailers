@@ -133,14 +133,12 @@
                                                 <constraint firstItem="1kN-Eb-XID" firstAttribute="leading" secondItem="SkN-SH-tbR" secondAttribute="leading" constant="10" id="IaH-Fx-o3v"/>
                                                 <constraint firstItem="1kN-Eb-XID" firstAttribute="centerY" secondItem="SkN-SH-tbR" secondAttribute="centerY" id="WgZ-FQ-Dqq"/>
                                                 <constraint firstAttribute="trailing" secondItem="6cQ-Hd-cmG" secondAttribute="trailing" constant="10" id="Yy8-Eq-vLS"/>
-                                                <constraint firstItem="1kN-Eb-XID" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SkN-SH-tbR" secondAttribute="top" constant="12" id="Zgr-UG-4H3"/>
                                                 <constraint firstItem="47b-aS-MhT" firstAttribute="leading" secondItem="6cQ-Hd-cmG" secondAttribute="leading" id="cAQ-Zf-Awg"/>
                                                 <constraint firstItem="DYb-RC-1DR" firstAttribute="top" secondItem="NLO-7Q-0ig" secondAttribute="bottom" constant="6" id="ftE-Ev-UCv"/>
                                                 <constraint firstItem="DYb-RC-1DR" firstAttribute="leading" secondItem="6cQ-Hd-cmG" secondAttribute="leading" id="kiq-na-q4z"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DYb-RC-1DR" secondAttribute="bottom" constant="12" id="mYN-Bn-Pno"/>
                                                 <constraint firstItem="NLO-7Q-0ig" firstAttribute="top" secondItem="47b-aS-MhT" secondAttribute="bottom" constant="6" id="o6X-DI-Qsi"/>
                                                 <constraint firstItem="DYb-RC-1DR" firstAttribute="trailing" secondItem="6cQ-Hd-cmG" secondAttribute="trailing" id="ol0-Ag-PQ4"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1kN-Eb-XID" secondAttribute="bottom" constant="12" id="stv-aW-UYx"/>
                                                 <constraint firstItem="47b-aS-MhT" firstAttribute="trailing" secondItem="6cQ-Hd-cmG" secondAttribute="trailing" id="tV2-io-xtf"/>
                                                 <constraint firstItem="6cQ-Hd-cmG" firstAttribute="top" secondItem="SkN-SH-tbR" secondAttribute="top" constant="10" id="wnz-rK-hl2"/>
                                             </constraints>
