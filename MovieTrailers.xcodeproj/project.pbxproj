@@ -347,10 +347,10 @@
 		28BCFDE7287CADAF008ECF2B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				28BCFE1A287D3870008ECF2B /* Utilities */,
-				2893405728C1F58000C23776 /* DIContainers */,
 				288C215028AB8D6C00B832FD /* Coordinators */,
+				2893405728C1F58000C23776 /* DIContainers */,
 				28BCFE01287D3212008ECF2B /* MovieModule */,
+				28BCFE1A287D3870008ECF2B /* Utilities */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";

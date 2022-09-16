@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieListViewController: UIViewController, Alertable {
+final class MovieListViewController: UIViewController, Alertable {
     
     //MARK: - Layout:-
     @IBOutlet weak var searchBar: UISearchBar!
