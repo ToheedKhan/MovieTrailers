@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MovieListCoordinator : NSObject, Coordinator, UINavigationControllerDelegate {
+final class MovieListCoordinator : NSObject, Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     
@@ -16,7 +16,6 @@ final class MovieListCoordinator : NSObject, Coordinator, UINavigationController
     }
     
     func start() {
-        navigationController.delegate = self
         let movieListVC = MovieListDI(networkManager: AppDI().networkManager).createMovieListViewController()
         movieListVC.movieListCoordinator = self
         self.navigationController.pushViewController(movieListVC, animated: false)
