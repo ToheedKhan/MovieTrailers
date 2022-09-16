@@ -35,9 +35,9 @@ final class MovieListViewModelImpl: IMovieListViewModel {
     
     private func getMovies() {
         useCase.fetchRecentMovies()
-            .done(on: .main) { [weak self] domainModelDTO in
-                debugPrint("Success ===> ", domainModelDTO)
-                let model = domainModelDTO.toPresentation()
+            .done(on: .main) { [weak self] domainModel in
+                debugPrint("Success ===> ", domainModel)
+                let model = domainModel.toPresentation()
                 self?.getData(model: model)
             }
             .catch(on: .main, policy: .allErrors) { [weak self] error in
