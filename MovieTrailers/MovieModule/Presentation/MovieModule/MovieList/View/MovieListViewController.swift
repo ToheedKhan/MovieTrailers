@@ -108,7 +108,6 @@ extension MovieListViewController: UITableViewDataSource {
             fatalError()
         }
         cell.configure(viewModel: viewModel.movieCellViewModels[indexPath.row])
-        cell.layoutIfNeeded()
         
         return cell
     }
